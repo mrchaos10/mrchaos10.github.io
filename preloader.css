@@ -1,0 +1,51 @@
+body{
+     background: url(bg.jpg);
+     background-size: cover;
+}
+.loader{
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 60px;
+   height: 60px;
+   transform: translate(-50%,-50%);
+}
+.loader .line{
+    width: 5px;
+    height: 70px;
+    background: #fff;
+    display: inline-block;
+    border-radius: 50px;
+    animation: animate 1.5s infinite ease-in-out
+}
+@keyframes animate{
+    0%, 50%, 100%{
+        transform: scaleY(0.5);
+    }
+    20%{
+        transform: scaleY(1.0);
+    }
+}
+.line.one{
+    background: #0057E6;
+}
+.line.two{
+    animation-delay: -1.4s;
+    background: #00f260;
+}
+.line.three{
+    animation-delay: -1.3s;
+    background: #f7b733;
+}
+.line.four{
+    animation-delay: -1.2s;
+    background: #fc4a1a;
+}
+.line.five{
+    animation-delay: -1.1s;
+    background: #ff0043;
+}
+.line.six{
+    animation-delay: -1.0s;
+    background: #a100ff;
+}
