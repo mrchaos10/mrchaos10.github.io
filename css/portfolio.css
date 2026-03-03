@@ -556,3 +556,52 @@ strong { color: inherit; }
   .edu-gpa-col { margin-left: 0; }
   .stat-number { font-size: 1.5rem; }
 }
+
+/* =====================================================
+   RECOMMENDATIONS
+   ===================================================== */
+.recommendation-item {
+  padding: 1rem 0;
+}
+.rec-meta {
+  margin-bottom: .5rem;
+  font-size: .95rem;
+}
+.rec-quote {
+  margin: 0;
+  padding: .75rem 1.25rem;
+  border-left: 4px solid var(--visa-gold);
+  background: var(--visa-gray);
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+  color: var(--visa-text);
+  font-size: .92rem;
+  line-height: 1.65;
+}
+
+/* =====================================================
+   CERTIFICATIONS – linked titles
+   ===================================================== */
+.cert-info h4 a {
+  color: var(--visa-navy);
+  text-decoration: none;
+}
+.cert-info h4 a:hover {
+  color: var(--visa-gold-dark);
+  text-decoration: underline;
+}
+
+/* =====================================================
+   COMPANY LOGO PLACEHOLDER (no image available)
+   ===================================================== */
+.company-logo-placeholder,
+.exp-logo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background: var(--visa-gray);
+  border: 1px solid var(--visa-border);
+}
