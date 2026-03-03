@@ -29,37 +29,41 @@
         <nav aria-label="Site navigation">
           <ul class="nav">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html" aria-current="page">
+              <a class="nav-link" href="index.html" aria-current="page" data-tip="Profile">
                 <i class="now-ui-icons users_single-02" aria-hidden="true"></i>
                 <span>Profile</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="experience.html">
+              <a class="nav-link" href="experience.html" data-tip="Experience">
                 <i class="now-ui-icons business_badge" aria-hidden="true"></i>
                 <span>Experience</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="education.html">
+              <a class="nav-link" href="education.html" data-tip="Education">
                 <i class="now-ui-icons education_hat" aria-hidden="true"></i>
                 <span>Education</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="projects.html">
+              <a class="nav-link" href="projects.html" data-tip="Projects">
                 <i class="now-ui-icons design_app" aria-hidden="true"></i>
                 <span>Projects</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Resume.pdf" target="_blank" rel="noopener" aria-label="Download Resume PDF">
+              <a class="nav-link" href="Resume.pdf" target="_blank" rel="noopener" aria-label="Download Resume PDF" data-tip="Resume">
                 <i class="now-ui-icons files_paper" aria-hidden="true"></i>
                 <span>Resume</span>
               </a>
             </li>
           </ul>
         </nav>
+        <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          <span class="collapse-text">Collapse</span>
+        </button>
       </div>
     </aside>
     <!-- /Sidebar -->
@@ -579,14 +583,6 @@
 
       <footer class="footer" role="contentinfo">
         <div class="container-fluid">
-          <nav aria-label="Footer links">
-            <ul class="footer-menu">
-              <li><a href="index.html">Profile</a></li>
-              <li><a href="experience.html">Experience</a></li>
-              <li><a href="education.html">Education</a></li>
-              <li><a href="projects.html">Projects</a></li>
-            </ul>
-          </nav>
           <div class="copyright">
             &copy; <span id="year"></span> Varadharajan Raghavendran
           </div>
@@ -598,6 +594,7 @@
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
   <script src="js/sidebar.js"></script>
+  <script src="js/f1.js"></script>
   <script>
     // Animated number counter triggered on scroll
     function animateCounters() {

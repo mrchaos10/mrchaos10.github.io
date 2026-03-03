@@ -335,9 +335,6 @@ input:focus-visible {
 .card-plain .card-header { border-bottom-color: var(--visa-gold); }
 .card-plain .card-title  { color: var(--visa-navy); }
 
-.stat-highlight { padding: 1rem .5rem; }
-.stat-number    { font-size: 2rem; font-weight: 800; margin: 0 0 .3rem; }
-
 .text-warning { color: var(--visa-gold)  !important; }
 .text-info    { color: var(--visa-navy)  !important; }
 .text-success { color: #1A7A40 !important; }
@@ -960,4 +957,308 @@ strong { color: inherit; }
   .impact-grid { grid-template-columns: repeat(2, 1fr); }
   .impact-number { font-size: 2.1rem; }
   .domain-grid { grid-template-columns: 1fr; }
+}
+
+/* =====================================================
+   SIDEBAR — COLLAPSIBLE (Desktop)
+   ===================================================== */
+.sidebar {
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.main-panel {
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.sidebar-wrapper {
+  position: relative !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Collapse toggle button */
+.sidebar-collapse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: auto 10px 18px;
+  padding: 8px 12px;
+  background: rgba(255, 184, 28, 0.12);
+  color: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 184, 28, 0.28);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  transition: background 0.2s, color 0.2s;
+  width: calc(100% - 20px);
+  flex-shrink: 0;
+}
+.sidebar-collapse-btn:hover {
+  background: rgba(255, 184, 28, 0.25);
+  color: #fff;
+}
+.sidebar-collapse-btn i {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Collapsed state */
+body.sidebar-collapsed .sidebar {
+  width: 68px !important;
+}
+body.sidebar-collapsed .main-panel {
+  margin-left: 68px !important;
+}
+body.sidebar-collapsed .sidebar .logo-normal {
+  display: none !important;
+}
+body.sidebar-collapsed .sidebar .logo {
+  justify-content: center !important;
+  padding: 1rem 0.25rem !important;
+}
+body.sidebar-collapsed .sidebar .nav-link span {
+  display: none !important;
+}
+body.sidebar-collapsed .sidebar .nav-link {
+  justify-content: center !important;
+  padding: 0.8rem 0 !important;
+  gap: 0 !important;
+}
+body.sidebar-collapsed .sidebar .nav-link i {
+  width: auto !important;
+  font-size: 1.2rem !important;
+}
+body.sidebar-collapsed .sidebar-collapse-btn i {
+  transform: rotate(180deg);
+}
+body.sidebar-collapsed .sidebar-collapse-btn .collapse-text {
+  display: none;
+}
+body.sidebar-collapsed .sidebar-collapse-btn {
+  padding: 8px 6px;
+  width: calc(100% - 12px);
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+/* Tooltip on hover in collapsed mode */
+body.sidebar-collapsed .sidebar .nav-link {
+  position: relative;
+}
+body.sidebar-collapsed .sidebar .nav-link[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 22, 55, 0.97);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2000;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 184, 28, 0.25);
+  letter-spacing: 0.04em;
+}
+
+/* =====================================================
+   FOOTER — MINIMAL (links cleared)
+   ===================================================== */
+.footer .footer-menu {
+  display: none !important;
+}
+.footer .copyright {
+  text-align: center;
+  font-size: .8rem;
+}
+.footer {
+  padding: 0.9rem 0 !important;
+}
+
+/* =====================================================
+   F1 SOUND BUTTON (fixed, all pages)
+   ===================================================== */
+.f1-sound-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--visa-navy);
+  color: var(--visa-gold);
+  border: 2px solid var(--visa-gold);
+  border-radius: 24px;
+  padding: 9px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 4px 20px rgba(0, 51, 102, 0.4);
+  transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.f1-sound-btn:hover {
+  background: var(--visa-gold);
+  color: var(--visa-navy);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 184, 28, 0.45);
+}
+.f1-sound-btn.f1-muted {
+  opacity: 0.55;
+  border-color: rgba(255, 184, 28, 0.35);
+  color: rgba(255, 184, 28, 0.55);
+}
+.f1-sound-btn i { font-size: 13px; }
+@media (max-width: 576px) {
+  .f1-sound-btn span { display: none; }
+  .f1-sound-btn { padding: 10px 14px; border-radius: 50%; }
+}
+
+/* =====================================================
+   F1 RACE TRACK — Experience Page
+   ===================================================== */
+.f1-race-wrapper {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* Narrow track strip on the left */
+.f1-track-strip {
+  width: 56px;
+  flex-shrink: 0;
+  position: relative;
+  align-self: stretch;
+  min-height: 100px;
+}
+
+/* The tarmac road */
+.f1-track-road {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  background: repeating-linear-gradient(
+    180deg,
+    #111827 0px, #111827 18px,
+    #1f2937 18px, #1f2937 36px
+  );
+  border-left:  2px solid rgba(255, 184, 28, 0.55);
+  border-right: 2px solid rgba(255, 184, 28, 0.55);
+  border-radius: 11px;
+}
+
+/* Dashed centre line */
+.f1-track-road::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%; transform: translateX(-50%);
+  width: 3px;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.6) 0px, rgba(255, 255, 255, 0.6) 8px,
+    transparent 8px, transparent 16px
+  );
+}
+
+/* Chequered flag at top of track */
+.f1-track-road::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 10px;
+  background: repeating-linear-gradient(
+    90deg,
+    #fff 0px, #fff 4px,
+    #000 4px, #000 8px
+  );
+  border-radius: 11px 11px 0 0;
+}
+
+/* Milestone dots */
+.f1-milestone-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--visa-gold);
+  border: 3px solid var(--visa-navy-dark);
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: 0 0 8px rgba(255, 184, 28, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  cursor: default;
+}
+.f1-milestone-dot.active {
+  transform: translateX(-50%) scale(1.55);
+  box-shadow: 0 0 20px rgba(255, 184, 28, 0.95), 0 0 6px rgba(255, 255, 255, 0.6);
+  background: #fff;
+}
+
+/* F1 car sprite */
+.f1-car-sprite {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  top: -40px;
+  transition: top 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 5px 12px rgba(255, 184, 28, 0.45));
+}
+.f1-car-sprite.f1-revving {
+  animation: f1CarShake 0.08s ease-in-out 5;
+  filter: drop-shadow(0 5px 22px rgba(255, 184, 28, 0.95));
+}
+@keyframes f1CarShake {
+  0%,  100% { transform: translateX(-50%); }
+  33%        { transform: translateX(calc(-50% - 2px)) rotate(-1.5deg); }
+  66%        { transform: translateX(calc(-50% + 2px)) rotate( 1.5deg); }
+}
+
+/* Exhaust speed lines */
+.f1-speed-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: 2px;
+  opacity: 0;
+  transition: opacity 0.12s;
+  pointer-events: none;
+}
+.f1-car-sprite.f1-revving .f1-speed-lines { opacity: 1; }
+.f1-speed-lines span {
+  width: 4px;
+  height: 14px;
+  background: linear-gradient(180deg, rgba(255, 100, 0, 0.85), transparent);
+  border-radius: 2px;
+}
+
+/* Cards column */
+.f1-cards-col {
+  flex: 1;
+  min-width: 0;
+  padding-left: 14px;
+}
+
+/* Hide track on small screens */
+@media (max-width: 768px) {
+  .f1-track-strip { display: none; }
+  .f1-cards-col   { padding-left: 0; }
 }
