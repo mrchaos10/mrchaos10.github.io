@@ -760,3 +760,204 @@ strong { color: inherit; }
   .proj-grid,
   .proj-grid-sm { grid-template-columns: 1fr; }
 }
+
+/* =====================================================
+   HEADER TAGLINE
+   ===================================================== */
+.header-tagline {
+  font-size: .85rem;
+  font-weight: 500;
+  color: rgba(255,255,255,.65);
+  letter-spacing: .06em;
+  margin-top: .25rem;
+  text-transform: uppercase;
+}
+
+/* =====================================================
+   CAREER IMPACT DASHBOARD
+   ===================================================== */
+.impact-dashboard {
+  background: linear-gradient(135deg, #001833 0%, #002244 40%, #003366 75%, #004080 100%);
+  border-radius: 16px;
+  padding: 2.25rem 2.5rem 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,51,102,.35);
+}
+/* decorative glow blobs */
+.impact-dashboard::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,184,28,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.impact-dashboard::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -40px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,184,28,.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.impact-eyebrow {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,184,28,.75);
+  text-align: center;
+  margin-bottom: 1.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.impact-metric {
+  text-align: center;
+  padding: 1rem 1.25rem;
+  border-right: 1px solid rgba(255,255,255,.1);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  transition: background .25s;
+  cursor: default;
+}
+.impact-metric:hover {
+  background: rgba(255,184,28,.07);
+}
+/* remove right border from last column */
+.impact-metric:nth-child(3n) { border-right: none; }
+/* remove bottom border from last row */
+.impact-metric:nth-child(n+4) { border-bottom: none; }
+
+.impact-number {
+  display: block;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #FFB81C;
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+}
+.impact-unit {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FFB81C;
+  vertical-align: super;
+  line-height: 1;
+}
+.impact-label {
+  display: block;
+  color: #FFFFFF;
+  font-size: .88rem;
+  font-weight: 600;
+  margin-top: .4rem;
+}
+.impact-sub {
+  display: block;
+  color: rgba(255,255,255,.45);
+  font-size: .72rem;
+  margin-top: .15rem;
+}
+
+/* =====================================================
+   DOMAINS OF EXPERTISE
+   ===================================================== */
+.domain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+.domain-card {
+  padding: 1.35rem 1.25rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--visa-border);
+  background: var(--visa-white);
+  transition: box-shadow .25s, transform .25s, border-color .25s;
+  position: relative;
+  overflow: hidden;
+}
+.domain-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--visa-navy), var(--visa-gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+.domain-card:hover {
+  box-shadow: 0 8px 28px rgba(0,51,102,.14);
+  transform: translateY(-4px);
+  border-color: var(--visa-gold);
+}
+.domain-card:hover::after {
+  transform: scaleX(1);
+}
+
+.domain-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: .85rem;
+}
+
+.domain-title {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--visa-navy);
+  margin: 0 0 .45rem;
+}
+
+.domain-desc {
+  font-size: .82rem;
+  color: var(--visa-muted);
+  line-height: 1.55;
+  margin: 0 0 .8rem;
+}
+
+.domain-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+}
+.domain-tag {
+  background: rgba(0,51,102,.07);
+  color: var(--visa-navy);
+  border-radius: 4px;
+  font-size: .68rem;
+  padding: .15rem .45rem;
+  font-weight: 600;
+}
+
+@media (max-width: 991px) {
+  .impact-grid { grid-template-columns: repeat(2, 1fr); }
+  .impact-metric:nth-child(3n) { border-right: 1px solid rgba(255,255,255,.1); }
+  .impact-metric:nth-child(2n) { border-right: none; }
+  .impact-metric:nth-child(n+5) { border-bottom: none; }
+  .impact-metric:nth-child(-n+4) { border-bottom: 1px solid rgba(255,255,255,.1); }
+  .domain-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 576px) {
+  .impact-dashboard { padding: 1.5rem 1rem; }
+  .impact-grid { grid-template-columns: repeat(2, 1fr); }
+  .impact-number { font-size: 2.1rem; }
+  .domain-grid { grid-template-columns: 1fr; }
+}
