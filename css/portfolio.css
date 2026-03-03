@@ -1,198 +1,479 @@
 /* =====================================================
-   Portfolio Custom Styles
-   Now UI Dashboard – Static HTML Overrides & Extensions
+   Portfolio Custom Styles — Visa Brand Identity
+   Primary Navy  : #003366
+   Gold Accent   : #FFB81C
+   White         : #FFFFFF
+   Light Surface : #F5F5F5
    ===================================================== */
 
-/* Skip link (ADA WCAG 2.4.1) */
+/* ---------- Visa brand variables ---------- */
+:root {
+  --visa-navy:   #003366;
+  --visa-gold:   #FFB81C;
+  --visa-white:  #FFFFFF;
+  --visa-gray:   #F5F5F5;
+  --visa-navy-dark: #002244;
+  --visa-navy-mid:  #004488;
+  --visa-gold-dark: #D9A000;
+  --visa-text:   #1A1A2E;
+  --visa-muted:  #6B7280;
+  --visa-border: #E0E7EF;
+}
+
+/* ---------- Reset body font to match Visa ---------- */
+body {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--visa-text);
+  background: var(--visa-gray);
+}
+
+/* ---------- Skip link (ADA WCAG 2.4.1) ---------- */
 .skip-link {
   position: absolute;
   top: -100%;
   left: 0;
   padding: .75rem 1.5rem;
-  background: #f96332;
-  color: #fff;
+  background: var(--visa-gold);
+  color: var(--visa-navy);
   font-weight: 700;
   z-index: 99999;
   text-decoration: none;
   transition: top .2s;
 }
-.skip-link:focus { top: 0; outline: 3px solid #ffdd00; outline-offset: 2px; }
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--visa-navy);
+  outline-offset: 2px;
+}
 
-/* Visible focus rings (WCAG 2.4.7) */
-a:focus-visible, button:focus-visible,
-[role="button"]:focus-visible, input:focus-visible {
-  outline: 3px solid #f96332;
+/* ---------- Focus rings (WCAG 2.4.7) ---------- */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--visa-gold);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* ---- Header ---- */
-.panel-header {
-  background: linear-gradient(195deg, #1a73e8 0%, #0d47a1 100%);
-  position: relative;
-  min-height: 230px;
+/* =====================================================
+   SIDEBAR — Visa Navy
+   ===================================================== */
+.sidebar,
+.sidebar[data-color="blue"] {
+  background: linear-gradient(180deg, var(--visa-navy) 0%, var(--visa-navy-dark) 100%) !important;
+  box-shadow: 4px 0 12px rgba(0, 51, 102, 0.25);
+}
+
+.sidebar .logo {
+  border-bottom: 1px solid rgba(255, 184, 28, 0.35);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.sidebar .logo-mini {
+  background: var(--visa-gold);
+  color: var(--visa-navy);
+  font-weight: 900;
+  font-size: 1rem;
+  border-radius: 6px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
+  flex-shrink: 0;
 }
-.panel-header-sm {
-  min-height: 120px;
-}
-.panel-header-lg {
-  min-height: 280px;
-}
-.header-content { color: #fff; padding: 1rem; }
-.header-title   { font-size: 2.6rem; font-weight: 700; margin-bottom: .4rem; }
-.header-subtitle { font-size: 1.1rem; opacity: .9; }
-.header-title-sm  { font-size: 1.8rem; font-weight: 700; margin-bottom: .25rem; }
-.header-subtitle-sm { font-size: .95rem; opacity: .9; }
 
-/* ---- Sidebar ---- */
-.sidebar { background: linear-gradient(195deg, #1e2f4a 0%, #13203a 100%); }
-.sidebar .logo { border-bottom: 1px solid rgba(255,255,255,.1); }
-.sidebar .nav .nav-link { color: rgba(255,255,255,.75); font-size: .875rem; }
-.sidebar .nav .nav-link:hover,
-.sidebar .nav-item.active .nav-link { color: #fff; background: rgba(255,255,255,.1); border-radius: 4px; }
+.sidebar .logo-normal {
+  color: var(--visa-white) !important;
+  font-weight: 700;
+  font-size: .95rem;
+  letter-spacing: .02em;
+  text-decoration: none;
+}
 
-/* ---- Cards ---- */
+/* Nav links */
+.sidebar .nav .nav-link {
+  color: rgba(255, 255, 255, .75) !important;
+  font-size: .85rem;
+  font-weight: 500;
+  padding: .7rem 1.25rem;
+  border-radius: 6px;
+  margin: .15rem .5rem;
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  transition: background .15s, color .15s;
+  text-decoration: none;
+}
+
+.sidebar .nav .nav-link i {
+  font-size: 1.05rem;
+  width: 20px;
+  text-align: center;
+}
+
+.sidebar .nav .nav-link:hover {
+  background: rgba(255, 184, 28, .15) !important;
+  color: var(--visa-white) !important;
+}
+
+.sidebar .nav-item.active .nav-link {
+  background: var(--visa-gold) !important;
+  color: var(--visa-navy) !important;
+  font-weight: 700;
+}
+
+/* =====================================================
+   TOP NAVBAR
+   ===================================================== */
+.navbar.navbar-transparent {
+  background: rgba(0, 51, 102, .95) !important;
+  backdrop-filter: blur(8px);
+  padding: .6rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 51, 102, .3);
+}
+
+.navbar .navbar-brand {
+  color: var(--visa-white) !important;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.navbar .nav-link {
+  color: rgba(255, 255, 255, .85) !important;
+  font-size: 1.15rem;
+  padding: .25rem .6rem;
+}
+
+.navbar .nav-link:hover { color: var(--visa-gold) !important; }
+
+.navbar-toggler { border-color: rgba(255, 255, 255, .4); }
+.navbar-toggler-bar {
+  display: block;
+  height: 2px;
+  width: 22px;
+  background: var(--visa-white);
+  margin: 4px 0;
+  border-radius: 2px;
+}
+
+/* =====================================================
+   PANEL HEADER
+   ===================================================== */
+.panel-header {
+  background: linear-gradient(135deg, var(--visa-navy) 0%, var(--visa-navy-mid) 60%, var(--visa-navy-dark) 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Visa-style gold bottom accent bar */
+.panel-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--visa-gold);
+}
+
+.panel-header-sm  { min-height: 120px; }
+.panel-header-lg  { min-height: 280px; }
+
+.header-content      { color: var(--visa-white); padding: 1.25rem; text-align: center; }
+.header-title        { font-size: 2.4rem; font-weight: 800; margin-bottom: .4rem; letter-spacing: -.01em; }
+.header-subtitle     { font-size: 1.05rem; opacity: .88; font-weight: 400; }
+.header-title-sm     { font-size: 1.7rem; font-weight: 700; margin-bottom: .2rem; }
+.header-subtitle-sm  { font-size: .9rem; opacity: .85; }
+
+/* =====================================================
+   MAIN PANEL & CONTENT
+   ===================================================== */
+.main-panel { background: var(--visa-gray); }
+.content    { padding: 1.5rem; }
+
+/* =====================================================
+   CARDS — Visa style
+   ===================================================== */
 .card {
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  background: var(--visa-white);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 51, 102, .08);
   margin-bottom: 1.5rem;
 }
+
+.card-header {
+  background: transparent;
+  border-bottom: 2px solid var(--visa-gray);
+  padding: 1.1rem 1.5rem .75rem;
+}
+
+.card-title {
+  color: var(--visa-navy);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.card-title a { color: var(--visa-navy); }
+.category, .card-category { color: var(--visa-muted); font-size: .85rem; margin: .2rem 0 0; }
+.card-body { padding: 1.25rem 1.5rem; }
+.card-footer {
+  background: transparent;
+  border-top: 1px solid var(--visa-border);
+  padding: .75rem 1.5rem;
+}
+
+/* Profile / user card */
 .card-user .avatar {
-  width: 100px; height: 100px;
+  width: 96px; height: 96px;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,.2);
-  margin-top: -50px;
+  border: 4px solid var(--visa-gold);
+  box-shadow: 0 4px 16px rgba(0, 51, 102, .25);
+  margin-top: -48px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 .card-user .card-image img {
-  width: 100%; height: 150px; object-fit: cover;
-  border-radius: 8px 8px 0 0;
+  width: 100%; height: 140px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
 }
-.card-user .author { text-align: center; padding: 1rem 0 .5rem; }
-.card-user .title { font-size: 1.1rem; font-weight: 700; margin: .5rem 0 .25rem; }
-.card-user .description { color: #6c757d; }
 
-/* ---- Stats card ---- */
-.card-stats .icon-big { font-size: 2.5rem; }
-.card-stats .numbers .card-title { font-size: 1.4rem; font-weight: 700; }
-.card-stats .stats { font-size: .75rem; color: #9a9a9a; }
+.card-user .author { text-align: center; padding: .75rem 0 .5rem; }
+.card-user .title  { font-size: 1.1rem; font-weight: 700; color: var(--visa-navy); margin: .5rem 0 .2rem; }
+.card-user .description { color: var(--visa-muted); font-size: .9rem; }
 
-/* ---- Skills ---- */
+/* Stat cards */
+.card-stats .icon-big {
+  font-size: 2.2rem;
+  line-height: 3rem;
+  width: 3rem;
+  height: 3rem;
+}
+.icon-warning .now-ui-icons, .text-warning { color: var(--visa-gold)  !important; }
+.icon-success .now-ui-icons, .text-success { color: #28A745 !important; }
+.icon-danger  .now-ui-icons, .text-danger  { color: #DC3545 !important; }
+.icon-info    .now-ui-icons, .text-info    { color: var(--visa-navy) !important; }
+
+.card-stats .numbers .card-title { font-size: 1.4rem; font-weight: 800; color: var(--visa-navy); }
+.card-stats .card-category        { font-size: .78rem; color: var(--visa-muted); text-transform: uppercase; letter-spacing: .04em; }
+.card-stats .stats                { font-size: .75rem; color: var(--visa-muted); }
+
+/* Social buttons on profile card */
+.btn-neutral {
+  background: var(--visa-gray) !important;
+  border: 2px solid var(--visa-border) !important;
+  color: var(--visa-navy) !important;
+  transition: background .15s, border-color .15s;
+}
+.btn-neutral:hover {
+  background: var(--visa-gold) !important;
+  border-color: var(--visa-gold) !important;
+  color: var(--visa-navy) !important;
+}
+
+.btn-icon.btn-round {
+  width: 42px; height: 42px;
+  border-radius: 50% !important;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+/* =====================================================
+   SKILLS
+   ===================================================== */
 .skill-tags { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
 .skill-tags li { display: inline; }
-.badge-pill { font-weight: 500; padding: .35em .75em; font-size: .8rem; }
 
-/* ---- Current Role Spotlight ---- */
-.stat-highlight { padding: 1rem; }
-.stat-number { font-size: 2rem; font-weight: 700; margin: 0; }
+.badge-pill {
+  font-weight: 600;
+  padding: .35em .8em;
+  font-size: .78rem;
+  border-radius: 2rem;
+}
 
-/* ---- Accomplishment list ---- */
+.badge-primary  { background: var(--visa-navy) !important;  color: #fff !important; }
+.badge-info     { background: var(--visa-navy-mid) !important; color: #fff !important; }
+.badge-success  { background: #1A7A40 !important; color: #fff !important; }
+.badge-warning  { background: var(--visa-gold) !important; color: var(--visa-navy) !important; }
+.badge-danger   { background: #B91C1C !important; color: #fff !important; }
+
+.progress {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--visa-border);
+}
+.progress-bar.bg-info    { background: var(--visa-navy) !important; }
+.progress-bar.bg-success { background: #1A7A40 !important; }
+.progress-bar.bg-warning { background: var(--visa-gold) !important; }
+.progress-bar.bg-danger  { background: #B91C1C !important; }
+
+/* =====================================================
+   CURRENT ROLE SPOTLIGHT
+   ===================================================== */
+.card-plain { background: transparent; box-shadow: none; border: none; }
+.card-plain .card-header { border-bottom-color: var(--visa-gold); }
+.card-plain .card-title  { color: var(--visa-navy); }
+
+.stat-highlight { padding: 1rem .5rem; }
+.stat-number    { font-size: 2rem; font-weight: 800; margin: 0 0 .3rem; }
+
+.text-warning { color: var(--visa-gold)  !important; }
+.text-info    { color: var(--visa-navy)  !important; }
+.text-success { color: #1A7A40 !important; }
+.text-danger  { color: #B91C1C !important; }
+
+/* =====================================================
+   ACCOMPLISHMENT LIST
+   ===================================================== */
 .accomplishment-list { list-style: none; padding: 0; }
 .accomplishment-list li {
   padding: .6rem 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--visa-border);
   display: flex;
   gap: .75rem;
   align-items: flex-start;
+  font-size: .9rem;
 }
 .accomplishment-list li:last-child { border-bottom: none; }
-.accomplishment-list i { margin-top: .2rem; flex-shrink: 0; }
+.accomplishment-list i { margin-top: .15rem; flex-shrink: 0; }
 
-/* ---- Section title ---- */
+/* =====================================================
+   SECTION TITLE
+   ===================================================== */
 .section-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #1a73e8;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--visa-navy);
   margin-bottom: 1.25rem;
   padding-bottom: .5rem;
-  border-bottom: 2px solid #e8f0fe;
+  border-bottom: 3px solid var(--visa-gold);
+  text-transform: uppercase;
+  letter-spacing: .04em;
 }
 
-/* ---- Company cards ---- */
+/* =====================================================
+   COMPANY CARDS
+   ===================================================== */
+.company-card { text-align: center; }
 .company-card .company-logo {
-  max-height: 60px;
-  max-width: 160px;
+  max-height: 56px;
+  max-width: 150px;
   object-fit: contain;
 }
 
-/* ---- Experience cards ---- */
+/* =====================================================
+   EXPERIENCE CARDS
+   ===================================================== */
 .exp-card {
-  border-left: 4px solid #1a73e8;
-  transition: box-shadow .2s;
+  border-left: 5px solid var(--visa-navy);
+  transition: box-shadow .2s, border-color .2s;
 }
-.exp-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.12); }
-.exp-current { border-left-color: #f96332; }
+.exp-card:hover { box-shadow: 0 6px 24px rgba(0, 51, 102, .13); }
+.exp-current    { border-left-color: var(--visa-gold); }
 
 .exp-header {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 .exp-logo-col { flex-shrink: 0; }
 .exp-logo {
   width: 56px; height: 40px;
   object-fit: contain;
   border-radius: 4px;
-  background: #f8f9fa;
+  background: var(--visa-gray);
   padding: 4px;
+  border: 1px solid var(--visa-border);
 }
-.exp-title-col { flex: 1; }
-.exp-role    { font-size: 1.1rem; font-weight: 700; color: #1a73e8; margin: 0 0 .2rem; }
-.exp-current .exp-role { color: #e55a1c; }
-.exp-company { font-size: .95rem; font-weight: 600; color: #343a40; margin: 0 0 .4rem; }
-.exp-meta    { color: #6c757d; font-size: .85rem; display: flex; flex-wrap: wrap; gap: .75rem; margin: 0; }
+.exp-title-col { flex: 1; min-width: 0; }
+
+.exp-role    { font-size: 1.05rem; font-weight: 700; color: var(--visa-navy); margin: 0 0 .2rem; }
+.exp-current .exp-role { color: var(--visa-gold-dark); }
+.exp-company { font-size: .9rem; font-weight: 600; color: #374151; margin: 0 0 .35rem; }
+.exp-meta    {
+  color: var(--visa-muted);
+  font-size: .83rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin: 0;
+}
+.exp-meta span { display: flex; align-items: center; gap: .3rem; }
 
 .exp-badge {
   display: inline-block;
   padding: .2rem .6rem;
   border-radius: .25rem;
-  font-size: .72rem;
+  font-size: .7rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .05em;
+  letter-spacing: .06em;
   margin-bottom: .4rem;
 }
-.current-badge    { background: #f96332; color: #fff; }
-.internship-badge { background: #6c757d; color: #fff; }
+.current-badge    { background: var(--visa-gold); color: var(--visa-navy); }
+.internship-badge { background: var(--visa-navy); color: var(--visa-white); }
 
-.exp-body { padding: .5rem 0; }
-.exp-body ul { padding-left: 1.2rem; }
-.exp-body li { margin-bottom: .4rem; line-height: 1.6; color: #495057; }
-.exp-section { margin-bottom: 1rem; }
+.exp-body       { padding: .5rem 0; }
+.exp-body ul    { padding-left: 1.2rem; margin: 0; }
+.exp-body li    { margin-bottom: .4rem; line-height: 1.65; color: #374151; font-size: .9rem; }
+.exp-section    { margin-bottom: 1rem; }
 .exp-section-title {
-  font-size: .9rem;
+  font-size: .82rem;
   font-weight: 700;
-  color: #495057;
+  color: var(--visa-navy);
   text-transform: uppercase;
-  letter-spacing: .04em;
-  margin-bottom: .4rem;
+  letter-spacing: .05em;
+  margin-bottom: .35rem;
+  padding-left: .5rem;
+  border-left: 3px solid var(--visa-gold);
 }
 
 .exp-tags {
   display: flex;
   flex-wrap: wrap;
   gap: .35rem;
-  margin-top: .75rem;
+  margin-top: .85rem;
   padding-top: .75rem;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--visa-border);
 }
 .exp-tag {
   display: inline-block;
-  padding: .2rem .55rem;
-  background: #e8f0fe;
-  color: #1a73e8;
-  border: 1px solid #c5d8fd;
+  padding: .2rem .6rem;
+  background: #EEF2FF;
+  color: var(--visa-navy);
+  border: 1px solid #C7D7F5;
   border-radius: 2rem;
-  font-size: .76rem;
+  font-size: .75rem;
   font-weight: 600;
+  letter-spacing: .02em;
 }
 
-/* ---- Education cards ---- */
+/* =====================================================
+   EDUCATION CARDS
+   ===================================================== */
 .edu-card { margin-bottom: 1rem; }
 .edu-header {
   display: flex;
@@ -200,41 +481,59 @@ a:focus-visible, button:focus-visible,
   gap: 1rem;
   flex-wrap: wrap;
 }
-.edu-icon { font-size: 2.5rem; color: #1a73e8; }
-.edu-degree { font-size: 1.1rem; font-weight: 700; color: #1a73e8; margin: 0 0 .2rem; }
-.edu-institution { font-size: .95rem; font-weight: 600; color: #343a40; margin: 0 0 .4rem; }
-.edu-gpa-col { margin-left: auto; }
+.edu-icon     { font-size: 2.2rem; color: var(--visa-navy); }
+.edu-degree   { font-size: 1.05rem; font-weight: 700; color: var(--visa-navy); margin: 0 0 .2rem; }
+.edu-institution { font-size: .9rem; font-weight: 600; color: #374151; margin: 0 0 .35rem; }
+.edu-gpa-col  { margin-left: auto; }
+
 .gpa-badge {
-  background: linear-gradient(135deg, #1a73e8, #0d47a1);
-  color: #fff;
-  border-radius: 8px;
-  padding: .75rem 1.25rem;
+  background: linear-gradient(135deg, var(--visa-navy) 0%, var(--visa-navy-mid) 100%);
+  color: var(--visa-white);
+  border-radius: 10px;
+  padding: .85rem 1.25rem;
   text-align: center;
+  border-bottom: 3px solid var(--visa-gold);
 }
-.gpa-number { display: block; font-size: 2rem; font-weight: 700; line-height: 1; }
-.gpa-label  { font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; opacity: .85; }
+.gpa-number { display: block; font-size: 2rem; font-weight: 800; line-height: 1; }
+.gpa-label  { font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; opacity: .85; }
 
 .cert-item {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: .5rem 0;
+  padding: .6rem 0;
 }
-.cert-icon { font-size: 2rem; }
-.cert-title  { font-size: 1rem; font-weight: 600; margin: 0 0 .15rem; }
-.cert-issuer { font-size: .85rem; color: #6c757d; margin: 0; }
+.cert-icon  { font-size: 1.8rem; }
+.cert-title  { font-size: .95rem; font-weight: 700; color: var(--visa-navy); margin: 0 0 .15rem; }
+.cert-issuer { font-size: .82rem; color: var(--visa-muted); margin: 0; }
 
-/* ---- Footer ---- */
-.footer { background: #fff; border-top: 1px solid #f0f0f0; padding: 1.25rem 0; }
+/* =====================================================
+   FOOTER
+   ===================================================== */
+.footer {
+  background: var(--visa-navy);
+  border-top: 3px solid var(--visa-gold);
+  padding: 1.25rem 0;
+}
 .footer-menu {
   list-style: none; padding: 0; margin: 0 0 .5rem;
   display: flex; gap: 1.5rem; flex-wrap: wrap;
 }
-.footer-menu a { color: #6c757d; font-size: .85rem; text-decoration: none; }
-.footer-menu a:hover { color: #1a73e8; }
-.copyright { font-size: .8rem; color: #9a9a9a; }
+.footer-menu a { color: rgba(255,255,255,.75); font-size: .83rem; text-decoration: none; }
+.footer-menu a:hover { color: var(--visa-gold); }
+.copyright { font-size: .78rem; color: rgba(255,255,255,.5); }
 
-/* ---- Reduced motion (WCAG 2.3.3) ---- */
+/* =====================================================
+   LINKS & MISC
+   ===================================================== */
+a { color: var(--visa-navy); }
+a:hover { color: var(--visa-gold-dark); }
+hr { border-color: var(--visa-border); }
+strong { color: inherit; }
+
+/* =====================================================
+   REDUCED MOTION (WCAG 2.3.3)
+   ===================================================== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
@@ -242,11 +541,18 @@ a:focus-visible, button:focus-visible,
   }
 }
 
-/* ---- Responsive ---- */
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
 @media (max-width: 991px) {
-  .wrapper { flex-direction: column; }
-  .sidebar { position: static; width: 100%; height: auto; }
+  .sidebar { width: 100%; position: static; }
   .main-panel { width: 100%; }
-  .header-title { font-size: 1.8rem; }
+  .header-title { font-size: 1.7rem; }
+  .content { padding: 1rem; }
+}
+
+@media (max-width: 576px) {
   .exp-header { flex-direction: column; }
+  .edu-gpa-col { margin-left: 0; }
+  .stat-number { font-size: 1.5rem; }
 }
