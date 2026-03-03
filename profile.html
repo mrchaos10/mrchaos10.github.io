@@ -2,13 +2,12 @@
 <html lang="en">
 
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Varadharajan Raghavendran – Senior Consultant Staff Engineer at Visa Inc., specialising in distributed systems, event-driven architecture, AI-assisted workflows, and full-stack development.">
+    <meta name="author" content="Varadharajan Raghavendran">
 
-    <title>Varadharajan Raghavendran</title>
+    <title>Varadharajan Raghavendran – Staff Engineer &amp; Full Stack Developer</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -18,18 +17,24 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="css/stylish-portfolio.min.css" rel="stylesheet">
-
+    <!-- Custom CSS (non-minified for maintainability) -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
   </head>
 
   <body id="page-top">
 
-    <!-- Navigation -->
-    <a class="menu-toggle rounded" href="#">
-      <i class="fas fa-bars"></i>
-    </a>
-    <nav id="sidebar-wrapper">
+    <!-- Skip to main content (ADA / WCAG 2.4.1) -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Navigation toggle -->
+    <button class="menu-toggle rounded"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="sidebar-wrapper">
+      <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="sidebar-wrapper" aria-label="Main navigation">
       <ul class="sidebar-nav">
         <li class="sidebar-brand">
           <a class="js-scroll-trigger" href="#page-top">Wanna Know Me?</a>
@@ -44,6 +49,9 @@
           <a class="js-scroll-trigger" href="#services">Know More</a>
         </li>
         <li class="sidebar-nav-item">
+          <a class="js-scroll-trigger" href="#experience">Experience</a>
+        </li>
+        <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="#portfolio">Projects</a>
         </li>
         <li class="sidebar-nav-item">
@@ -52,217 +60,455 @@
       </ul>
     </nav>
 
-    <!-- Header -->
-    <header class="masthead d-flex">
-      <div class="container text-center my-auto">
-        <h1 class="mb-1">My Profile</h1>
-        <h3 class="mb-5">
-          <em>Continue Exploring Me here.</em>
-        </h3>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
-      </div>
-      <div class="overlay"></div>
-    </header>
+    <main id="main-content">
 
-    <!-- About -->
-    <section class="content-section bg-light" id="about">
-      <div class="container text-center">
-        <div class="row">
-          <div class="col-lg-10 mx-auto">
-            <h2>Am I a Blog Writer? No not that serious</h2>
-            <p class="lead mb-5">Blogging is one another hobby of mine.Connect to my 
-              <a href="https://mrchaos10.blogspot.com/">Blogspot</a>!</p>
-            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">My Accomplishments</a>
+      <!-- Header -->
+      <header class="masthead d-flex">
+        <div class="container text-center my-auto">
+          <h1 class="mb-1">Varadharajan Raghavendran</h1>
+          <h2 class="mb-3 masthead-subtitle">
+            <em>Senior Consultant Staff Engineer &middot; Visa Inc.</em>
+          </h2>
+          <p class="mb-5 masthead-tagline">Distributed Systems &bull; Event-Driven Architecture &bull; Full Stack &bull; AI</p>
+          <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+        </div>
+        <div class="overlay" aria-hidden="true"></div>
+      </header>
+
+      <!-- About / Blog -->
+      <section class="content-section bg-light" id="about" aria-labelledby="about-heading">
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-10 mx-auto">
+              <h2 id="about-heading">Am I a Blog Writer? No, not that serious</h2>
+              <p class="lead mb-5">Blogging is one of my hobbies. Connect to my
+                <a href="https://mrchaos10.blogspot.com/">Blogspot</a>!</p>
+              <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">My Accomplishments</a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Services -->
-    <section class="content-section bg-primary text-white text-center" id="services">
-      <div class="container">
-        <div class="content-section-heading">
-          <h3 class="text-secondary mb-0">Exploring Myself</h3>
-          <h2 class="mb-5">What have been Learnt So Far</h2>
-        </div>
-        <div class="row">
-          <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-screen-smartphone"></i>
-            </span>
-            <h4>
-              <strong>Android</strong>
-            </h4>
-            <p class="text-faded mb-0">Not a pro still learning</p>
+      <!-- Services / Skills -->
+      <section class="content-section bg-primary text-white text-center" id="services" aria-labelledby="services-heading">
+        <div class="container">
+          <div class="content-section-heading">
+            <h3 class="text-secondary mb-0">Exploring Myself</h3>
+            <h2 id="services-heading" class="mb-5">What Has Been Learnt So Far</h2>
           </div>
-
-          <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-pencil"></i>
-            </span>
-            <h4>
-              <strong>Blogging</strong>
-            </h4>
-            <p class="text-faded mb-0">Really a Beginner</p>
-          </div>
-          
-          <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-social-github"></i>
-            </span>
-            <h4>
-              <strong>Work Done</strong>
-            </h4>
-            <p class="text-faded mb-0">Find out some of my works
-              <i class="fas fa-smile"></i>
-              <a href="https://github.com/mrchaos10/" style="color: aliceblue">Github workspace</a></p>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-camera"></i>
-            </span>
-            <h4>
-              <strong>Captured Moments</strong>
-            </h4>
-            <p class="text-faded mb-0">I do take photos as well<i class="fas fa-child"></i></p>
-          </div>
-          
-        </div>
-      </div>
-    </section>
-
-    <!-- Callout -->
-    <section class="callout">
-      <div class="container text-center">
-        <h2 class="mx-auto mb-5" style="color: whitesmoke">View my resume 
-          for more details</h2>
-        <a class="btn btn-primary btn-xl" href="Resume.pdf" download >Download Now!</a>
-      </div>
-    </section>
-
-    <!-- Portfolio -->
-    <section class="content-section" id="portfolio">
-      <div class="container">
-        <div class="content-section-heading text-center">
-          <h3 class="text-secondary mb-0">Portfolio</h3>
-          <h2 class="mb-5">Recent Projects</h2>
-        </div>
-        <div class="row no-gutters">
-          <div class="col-lg-6">
-            <a class="portfolio-item" href="https://github.com/mrchaos10/HummingBirdFileSearchEngine">
-              <span class="caption">
-                <span class="caption-content">
-                  <h2>Networking</h2>
-                  <p class="mb-0">How does Google's Humming Bird Search Algorithm work ? Might be the way I tried <i class="fas fa-poo"></i></p>
-                </span>
+          <div class="row">
+            <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+              <span class="service-icon rounded-circle mx-auto mb-3" aria-hidden="true">
+                <i class="icon-screen-smartphone" aria-hidden="true"></i>
               </span>
-              <img class="img-fluid" src="img/portfolio-1.png" alt="HummingBirdFileSearchEngine" height="457" width="800">
-            </a>
-          </div>
-          <div class="col-lg-6">
-            <a class="portfolio-item" href="https://github.com/mrchaos10/LibraryManagementSystem">
-              <span class="caption">
-                <span class="caption-content">
-                  <h2>Library Management System</h2>
-                  <p class="mb-0">Since everyone does it I am also into the trap. <i class="fas fa-meh"></i></p>
-                </span>
+              <h4><strong>Android</strong></h4>
+              <p class="text-faded mb-0">Not a pro, still learning</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+              <span class="service-icon rounded-circle mx-auto mb-3" aria-hidden="true">
+                <i class="icon-pencil" aria-hidden="true"></i>
               </span>
-              <img class="img-fluid" src="img/portfolio-2.png" alt="Library Manager" height="457" width="800">
-            </a>
-          </div>
-          <div class="col-lg-6">
-            <a class="portfolio-item" href="https://github.com/mrchaos10/pdsminiproject">
-              <span class="caption">
-                <span class="caption-content">
-                  <h2>Snake And Ladder</h2>
-                  <p class="mb-0">No GUI where there is a need for the implementation in C++ <i class="fas fa-frown"></i> Btb I did it for Data Structures Lab </p>
-                </span>
+              <h4><strong>Blogging</strong></h4>
+              <p class="text-faded mb-0">Really a Beginner</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+              <span class="service-icon rounded-circle mx-auto mb-3" aria-hidden="true">
+                <i class="icon-social-github" aria-hidden="true"></i>
               </span>
-              <img class="img-fluid" src="img/portfolio-3.jpg" alt="Snake and Ladder daaww" height="457" width="800">
-            </a>
-          </div>
-          <div class="col-lg-6">
-            <a class="portfolio-item" href="https://github.com/mrchaos10/DisasterManagementPlatform">
-              <span class="caption">
-                <span class="caption-content">
-                  <h2>Disaster No Fear</h2>
-                  <p class="mb-0">The Chennai Floods and Cyclones struck me so hard so that I moved onto creating a Map Webframe that could server helping the people.It is slightly an exploitation of  Google maps API </p>
-                  
-                </span>
+              <h4><strong>Work Done</strong></h4>
+              <p class="text-faded mb-0">Find some of my work on
+                <a href="https://github.com/mrchaos10/" style="color: #fff; text-decoration: underline;" aria-label="Visit my GitHub workspace (opens in same tab)">GitHub</a>
+              </p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <span class="service-icon rounded-circle mx-auto mb-3" aria-hidden="true">
+                <i class="icon-camera" aria-hidden="true"></i>
               </span>
-              <img class="img-fluid" src="img/portfolio-4.png" alt="Disaster Manager" height="457" width="800">
-            </a>
+              <h4><strong>Captured Moments</strong></h4>
+              <p class="text-faded mb-0">I take photos too <i class="fas fa-child" aria-hidden="true"></i></p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Call to Action -->
-    <section class="content-section bg-primary text-white">
-      <div class="container text-center">
-        <h2 class="mb-4">Later I will use it in a better way...<i class="fas fa-user-check"></i>LOL</h2>
-        <a href="#" class="btn btn-xl btn-light mr-4">Top :)</a>
-        <a href="#contact" class="btn btn-xl btn-dark">Down :(</a>
-      </div>
-    </section>
+      <!-- Experience -->
+      <section class="content-section bg-light" id="experience" aria-labelledby="experience-heading">
+        <div class="container">
+          <div class="content-section-heading text-center">
+            <h3 class="text-secondary mb-0">Work History</h3>
+            <h2 id="experience-heading" class="mb-5">Professional Experience</h2>
+          </div>
+          <div class="experience-timeline">
 
-    <!-- Map -->
-    <section id="contact" class="map">
+            <!-- 1. Visa – Currencycloud (Current) -->
+            <article class="experience-item current">
+              <div class="experience-marker" aria-hidden="true"></div>
+              <div class="experience-content">
+                <div class="experience-header">
+                  <span class="exp-badge exp-badge--current">Current</span>
+                  <h3>Senior Consultant Staff Engineer / SDE-4</h3>
+                  <h4>Visa Inc. &mdash; Currencycloud End Client Onboarding</h4>
+                  <p class="experience-meta">
+                    <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Nov 2025 &ndash; Present</span>
+                    <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Bangalore, India</span>
+                  </p>
+                </div>
+                <ul class="experience-highlights">
+                  <li>Led engineering and architectural evolution of the End Client Onboarding platform supporting Currencycloud&rsquo;s B2B2X ecosystem; owned <strong>Case Management</strong> and <strong>Identity</strong> domains serving 20+ internal services.</li>
+                  <li>Applied <strong>Domain-Driven Design (DDD)</strong> to define bounded contexts, decomposing onboarding into 10+ capability-driven services and reducing cross-service coupling.</li>
+                  <li>Architected scalable event-driven platform using <strong>Java, Spring Boot &amp; Apache Kafka</strong>; handles <strong>300&ndash;500 onboarding workflow events/sec</strong> per pod with sub-50&thinsp;ms P95 latency.</li>
+                  <li>Reduced <strong>P99 latency by 20&ndash;25%</strong> via Datadog-driven analysis; boosted request concurrency <strong>2&ndash;3&times;</strong> by adopting R2DBC and Java Virtual Threads.</li>
+                  <li>Introduced <strong>AI-assisted compliance workflows</strong> using Claude Code &amp; agentic orchestration, reducing manual investigation time by <strong>35&ndash;40%</strong>.</li>
+                  <li>Served as Application Technical Contact (ATC) for 3+ mission-critical services; drove SSDLC governance, security posture reviews, and release readiness.</li>
+                </ul>
+                <div class="experience-tags" aria-label="Technologies used">
+                  <span class="exp-tag">Java</span>
+                  <span class="exp-tag">Spring Boot</span>
+                  <span class="exp-tag">Apache Kafka</span>
+                  <span class="exp-tag">R2DBC</span>
+                  <span class="exp-tag">Virtual Threads</span>
+                  <span class="exp-tag">DDD</span>
+                  <span class="exp-tag">Datadog</span>
+                  <span class="exp-tag">Claude AI</span>
+                  <span class="exp-tag">Kubernetes</span>
+                </div>
+              </div>
+            </article>
 
-      <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.3296475158586!2d80.23581031346308!3d13.014667517456397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267a226fdaafb%3A0x433785ef49b395c6!2sNew+Block+Hostel%2Fvaagai+block!5e0!3m2!1sen!2sin!4v1543662579971" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-      <br/>
-      <small>
-        <a href="https://www.google.com/maps/place/New+Block+Hostel%2Fvaagai+block/@13.0146675,80.2358103,17z/data=!3m1!4b1!4m5!3m4!1s0x3a5267a226fdaafb:0x433785ef49b395c6!8m2!3d13.0146623!4d80.237999?hl=en"></a>
-      </small>
+            <!-- 2. Visa – Loyalty & Benefits -->
+            <article class="experience-item">
+              <div class="experience-marker" aria-hidden="true"></div>
+              <div class="experience-content">
+                <div class="experience-header">
+                  <h3>Staff Data Engineer / Fullstack Engineer</h3>
+                  <h4>Visa Inc. &mdash; Loyalty and Benefits Platform</h4>
+                  <p class="experience-meta">
+                    <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Mar 2024 &ndash; Oct 2025</span>
+                    <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Bangalore, India</span>
+                  </p>
+                </div>
+                <ul class="experience-highlights">
+                  <li>Led a scrum team of 6 to modernise data pipelines from ETL/Spark to distributed stream processing with <strong>Apache Kafka</strong> and Lambda architecture.</li>
+                  <li>Redesigned pipelines handling <strong>5M real-time records</strong> and <strong>30M batch records</strong> with 6&thinsp;9&rsquo;s availability and Tier0 SLAs.</li>
+                  <li>Reduced REST/gRPC API latency by an average of <strong>200&thinsp;ms</strong> per request through optimised Java + Spring + Spark practices.</li>
+                  <li>Modernised Visa Feature Select from Struts/Spring MVC to <strong>Spring Boot + React microfrontends</strong>.</li>
+                  <li>Reduced GET API retrieval from 250&thinsp;ms to <strong>&lt;100&thinsp;ms at 300 TPS</strong> using the Snowflake pattern with Caffeine (L1) and Redis (L2) caches.</li>
+                  <li>Built GenAI tools: a <strong>marketing genie</strong> (OpenSora, DeepFloyd, Llama-3) and a <strong>virtual concierge</strong> with RAG powered by Redis VectorStore and Anthropic&rsquo;s Claude APIs.</li>
+                  <li>Consolidated merchant, issuer and other offers into a unified platform using KNN clustering for persona-based recommendations.</li>
+                </ul>
+                <div class="experience-tags" aria-label="Technologies used">
+                  <span class="exp-tag">Java</span>
+                  <span class="exp-tag">Apache Kafka</span>
+                  <span class="exp-tag">Spring Boot</span>
+                  <span class="exp-tag">React</span>
+                  <span class="exp-tag">Redis</span>
+                  <span class="exp-tag">Apache Spark</span>
+                  <span class="exp-tag">RAG</span>
+                  <span class="exp-tag">Llama-3</span>
+                  <span class="exp-tag">Claude APIs</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 3. Visa – Buyer Travel Solutions -->
+            <article class="experience-item">
+              <div class="experience-marker" aria-hidden="true"></div>
+              <div class="experience-content">
+                <div class="experience-header">
+                  <h3>Senior Data Engineer / Fullstack Engineer</h3>
+                  <h4>Visa Inc. &mdash; Buyer Travel Solutions &amp; Digital Benefits Platform</h4>
+                  <p class="experience-meta">
+                    <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Mar 2024 &ndash; Present</span>
+                    <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Bangalore, India</span>
+                  </p>
+                </div>
+                <ul class="experience-highlights">
+                  <li>Stabilised the Buyer Travel platform post-COVID, reducing cross-border declines by <strong>30%</strong> via Travel Authorization Tag work.</li>
+                  <li>Contributed to Visa Feature Select &rarr; Long-Term Architecture transition; enhanced UI/UX for broker clients including DragonPass and AXA.</li>
+                  <li>Implemented <strong>Redis + RediSearch</strong> improving performance by 40% and achieving 300 TPS per pod.</li>
+                  <li>Applied SOLID principles and adopted <strong>Micronaut + Reactive Streams</strong> for lighter, more responsive microservices.</li>
+                  <li>Developed complex features including impact assessment for benefits and a tree-structure builder ensuring no redundancy or rule violations.</li>
+                  <li>Led a team of 6 in a scrum environment delivering REST/gRPC APIs and Two-phase commit transaction management.</li>
+                </ul>
+                <div class="experience-tags" aria-label="Technologies used">
+                  <span class="exp-tag">Java</span>
+                  <span class="exp-tag">Micronaut</span>
+                  <span class="exp-tag">Redis</span>
+                  <span class="exp-tag">RediSearch</span>
+                  <span class="exp-tag">gRPC</span>
+                  <span class="exp-tag">Reactive Streams</span>
+                  <span class="exp-tag">Apache Hive</span>
+                  <span class="exp-tag">SOLID</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 4. Visa – Risk & Auth -->
+            <article class="experience-item">
+              <div class="experience-marker" aria-hidden="true"></div>
+              <div class="experience-content">
+                <div class="experience-header">
+                  <h3>Senior Software Engineer</h3>
+                  <h4>Visa Inc. &mdash; Risk and Authentication Programs</h4>
+                  <p class="experience-meta">
+                    <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Apr 2021 &ndash; May 2023</span>
+                    <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Bangalore, India</span>
+                  </p>
+                </div>
+                <ul class="experience-highlights">
+                  <li>Developed the <strong>Guide Authentication product</strong> using FIDO standards; contributed to CI/CD setup, test automation (Karate, Locust), and microservices stack.</li>
+                  <li>Generated <strong>fraud signals from identity graphs</strong> using JanusGraph; led a team of 4 engineers building batch pipelines and synthetic fraud scores from TC40 data.</li>
+                  <li>Conducted Exploratory Data Analysis for graph modelling and evaluated JanusGraph for fraud detection feasibility.</li>
+                  <li>Awarded patent: <em>&ldquo;System, Method, and Computer Program Product for Machine Unlearning on Identity Graph Neural Networks.&rdquo;</em></li>
+                  <li>USPTO filed patent <strong>US&#x2011;17/878,823</strong>: System and Method for Scheduling Database Applications.</li>
+                  <li>Led migration of applications to an open-source <strong>Hadoop platform</strong>; mentored summer interns.</li>
+                </ul>
+                <div class="experience-tags" aria-label="Technologies used">
+                  <span class="exp-tag">Java</span>
+                  <span class="exp-tag">Spring Boot</span>
+                  <span class="exp-tag">JanusGraph</span>
+                  <span class="exp-tag">Hadoop</span>
+                  <span class="exp-tag">Kubernetes</span>
+                  <span class="exp-tag">Jenkins</span>
+                  <span class="exp-tag">Karate</span>
+                  <span class="exp-tag">Locust</span>
+                  <span class="exp-tag">FIDO</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 5. Visa – Merchant Data Products -->
+            <article class="experience-item">
+              <div class="experience-marker" aria-hidden="true"></div>
+              <div class="experience-content">
+                <div class="experience-header">
+                  <h3>Software Engineer</h3>
+                  <h4>Visa Inc. &mdash; Merchant Data Products</h4>
+                  <p class="experience-meta">
+                    <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Aug 2020 &ndash; Mar 2021</span>
+                    <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Bangalore, India</span>
+                  </p>
+                </div>
+                <ul class="experience-highlights">
+                  <li>Developed an automated framework for the <strong>Advertiser matching process</strong> for Visa Ad Solutions.</li>
+                  <li>Kickstarted the productionalization of <strong>propensity audiences</strong> for Visa Ad Solutions product.</li>
+                  <li>Worked across Python, Spark, Hadoop, Hive, and Shell scripting.</li>
+                </ul>
+                <div class="experience-tags" aria-label="Technologies used">
+                  <span class="exp-tag">Python</span>
+                  <span class="exp-tag">Apache Spark</span>
+                  <span class="exp-tag">Hadoop</span>
+                  <span class="exp-tag">Hive</span>
+                  <span class="exp-tag">Shell</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 6. Visa – Summer Internship -->
+            <article class="experience-item">
+              <div class="experience-marker" aria-hidden="true"></div>
+              <div class="experience-content">
+                <div class="experience-header">
+                  <span class="exp-badge exp-badge--internship">Internship</span>
+                  <h3>Summer Intern &mdash; Data Products Development</h3>
+                  <h4>Visa Inc.</h4>
+                  <p class="experience-meta">
+                    <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> May 2019 &ndash; Jul 2019</span>
+                    <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Bangalore, India</span>
+                  </p>
+                </div>
+                <ul class="experience-highlights">
+                  <li>Developed an automated healing framework to patch anomalies in transaction aggregations for the <strong>Merchant Search Engine</strong>.</li>
+                  <li>End-to-end development of the search engine with adequate transaction aggregations.</li>
+                  <li>Delivered a working solution within <strong>10 weeks</strong>, improving overall data quality and search rate using Apache Hadoop and Spark.</li>
+                </ul>
+                <div class="experience-tags" aria-label="Technologies used">
+                  <span class="exp-tag">Apache Hadoop</span>
+                  <span class="exp-tag">Apache Spark</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 7. Enunui – Summer Internship -->
+            <article class="experience-item">
+              <div class="experience-marker" aria-hidden="true"></div>
+              <div class="experience-content">
+                <div class="experience-header">
+                  <span class="exp-badge exp-badge--internship">Internship</span>
+                  <h3>Summer Intern &mdash; Full Stack Development</h3>
+                  <h4>Enunui Technologies</h4>
+                  <p class="experience-meta">
+                    <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Jun 2018 &ndash; Jul 2018</span>
+                    <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Erode, India</span>
+                  </p>
+                </div>
+                <ul class="experience-highlights">
+                  <li>Contributed to developing an event management system with <strong>NodeJS and Angular</strong>.</li>
+                  <li>Integrated <strong>Google Maps &amp; Directions API</strong> and MongoDB for the locate-event feature.</li>
+                  <li>Containerised the application and deployed it as micro-frontend and backend microservices.</li>
+                </ul>
+                <div class="experience-tags" aria-label="Technologies used">
+                  <span class="exp-tag">NodeJS</span>
+                  <span class="exp-tag">Angular</span>
+                  <span class="exp-tag">MongoDB</span>
+                  <span class="exp-tag">Google Maps API</span>
+                  <span class="exp-tag">Docker</span>
+                </div>
+              </div>
+            </article>
+
+          </div><!-- /.experience-timeline -->
+        </div><!-- /.container -->
+      </section>
+
+      <!-- Callout / Resume Download -->
+      <section class="callout" aria-label="Resume download">
+        <div class="container text-center">
+          <h2 class="mx-auto mb-5" style="color: whitesmoke;">View my full resume for more details</h2>
+          <a class="btn btn-primary btn-xl" href="Resume.pdf" download aria-label="Download resume PDF">Download Now!</a>
+        </div>
+      </section>
+
+      <!-- Portfolio / Projects -->
+      <section class="content-section" id="portfolio" aria-labelledby="portfolio-heading">
+        <div class="container">
+          <div class="content-section-heading text-center">
+            <h3 class="text-secondary mb-0">Portfolio</h3>
+            <h2 id="portfolio-heading" class="mb-5">Recent Projects</h2>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-lg-6">
+              <a class="portfolio-item" href="https://github.com/mrchaos10/HummingBirdFileSearchEngine">
+                <span class="caption">
+                  <span class="caption-content">
+                    <h2>Networking</h2>
+                    <p class="mb-0">How does Google&rsquo;s HummingBird Search Algorithm work? Here&rsquo;s my take <i class="fas fa-poo" aria-hidden="true"></i></p>
+                  </span>
+                </span>
+                <img class="img-fluid" src="img/portfolio-1.png" alt="HummingBird File Search Engine – a file search algorithm inspired by Google HummingBird" height="457" width="800">
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a class="portfolio-item" href="https://github.com/mrchaos10/LibraryManagementSystem">
+                <span class="caption">
+                  <span class="caption-content">
+                    <h2>Library Management System</h2>
+                    <p class="mb-0">Everyone builds one, so did I. <i class="fas fa-meh" aria-hidden="true"></i></p>
+                  </span>
+                </span>
+                <img class="img-fluid" src="img/portfolio-2.png" alt="Library Management System project screenshot" height="457" width="800">
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a class="portfolio-item" href="https://github.com/mrchaos10/pdsminiproject">
+                <span class="caption">
+                  <span class="caption-content">
+                    <h2>Snake And Ladder</h2>
+                    <p class="mb-0">No GUI – C++ implementation built for the Data Structures Lab <i class="fas fa-frown" aria-hidden="true"></i></p>
+                  </span>
+                </span>
+                <img class="img-fluid" src="img/portfolio-3.jpg" alt="Snake and Ladder C++ console game project" height="457" width="800">
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a class="portfolio-item" href="https://github.com/mrchaos10/DisasterManagementPlatform">
+                <span class="caption">
+                  <span class="caption-content">
+                    <h2>Disaster No Fear</h2>
+                    <p class="mb-0">Inspired by the Chennai Floods &ndash; a Google Maps-powered web platform to assist people during disasters.</p>
+                  </span>
+                </span>
+                <img class="img-fluid" src="img/portfolio-4.png" alt="Disaster Management Platform – Google Maps web app for disaster assistance" height="457" width="800">
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="content-section bg-primary text-white">
+        <div class="container text-center">
+          <h2 class="mb-4">More coming soon&hellip; <i class="fas fa-user-check" aria-hidden="true"></i></h2>
+          <a href="#page-top" class="btn btn-xl btn-light mr-4">Back to Top</a>
+          <a href="#contact" class="btn btn-xl btn-dark">Contact</a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Contact / Map -->
+    <section id="contact" class="map" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" class="sr-only">Location</h2>
+      <iframe
+        title="Google Maps showing College of Engineering Guindy, Anna University, Chennai"
+        width="100%"
+        height="100%"
+        frameborder="0"
+        scrolling="no"
+        marginheight="0"
+        marginwidth="0"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.3296475158586!2d80.23581031346308!3d13.014667517456397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267a226fdaafb%3A0x433785ef49b395c6!2sNew+Block+Hostel%2Fvaagai+block!5e0!3m2!1sen!2sin!4v1543662579971"
+        allowfullscreen
+        aria-label="Embedded Google Maps – College of Engineering Guindy"
+      ></iframe>
     </section>
 
     <!-- Footer -->
-    <footer class="footer text-center">
+    <footer class="footer text-center" role="contentinfo">
       <div class="container">
-        <ul class="list-inline mb-5">
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="https://www.facebook.com/mr.chaos.10">
-              <i class="icon-social-facebook"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="https://twitter.com/mr_chaos_10">
-              <i class="icon-social-twitter"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white" href="https://github.com/mrchaos10">
-              <i class="icon-social-github"></i>
-            </a>
-          </li>
-        
-        
-        <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white" href="https://www.linkedin.com/mrchaos10">
-          <i class="icon-social-linkedin"></i>
-          </a>
-        </li>
- 
-        <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white" href="https://www.instagram.com/__mr_chaos_10_____/">
-          <i class="icon-social-instagram"></i>
-          </a>
-        </li>
-        
-        <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white" href="https://www.youtube.com/channel/UCzpevHSkBma6BYC2aAAXnXQ">
-          <i class="icon-social-youtube"></i>
-          </a>
-        </li>
-      </ul>
-        <p class="text-muted small mb-0">Copyright &copy; Varadharajan</p>
+        <nav aria-label="Social media links">
+          <ul class="list-inline mb-5">
+            <li class="list-inline-item">
+              <a class="social-link rounded-circle text-white mr-3"
+                 href="https://www.facebook.com/mr.chaos.10"
+                 aria-label="Facebook – mr.chaos.10">
+                <i class="icon-social-facebook" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="social-link rounded-circle text-white mr-3"
+                 href="https://twitter.com/mr_chaos_10"
+                 aria-label="Twitter – @mr_chaos_10">
+                <i class="icon-social-twitter" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="social-link rounded-circle text-white mr-3"
+                 href="https://github.com/mrchaos10"
+                 aria-label="GitHub – mrchaos10">
+                <i class="icon-social-github" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="social-link rounded-circle text-white mr-3"
+                 href="https://www.linkedin.com/in/mrchaos10"
+                 aria-label="LinkedIn – Varadharajan">
+                <i class="icon-social-linkedin" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="social-link rounded-circle text-white mr-3"
+                 href="https://www.instagram.com/__mr_chaos_10_____/"
+                 aria-label="Instagram – __mr_chaos_10_____">
+                <i class="icon-social-instagram" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="social-link rounded-circle text-white"
+                 href="https://www.youtube.com/channel/UCzpevHSkBma6BYC2aAAXnXQ"
+                 aria-label="YouTube channel">
+                <i class="icon-social-youtube" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <p class="text-muted small mb-0">Copyright &copy; Varadharajan Raghavendran</p>
       </div>
     </footer>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
-      <i class="fas fa-angle-up"></i>
+    <!-- Scroll to Top Button -->
+    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top" aria-label="Scroll to top of page">
+      <i class="fas fa-angle-up" aria-hidden="true"></i>
     </a>
 
     <!-- Bootstrap core JavaScript -->
@@ -274,6 +520,19 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/stylish-portfolio.min.js"></script>
+
+    <!-- ADA: keep aria-expanded in sync with sidebar toggle -->
+    <script>
+      (function () {
+        var toggle = document.querySelector('.menu-toggle');
+        if (toggle) {
+          toggle.addEventListener('click', function () {
+            var expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', String(!expanded));
+          });
+        }
+      }());
+    </script>
 
   </body>
 

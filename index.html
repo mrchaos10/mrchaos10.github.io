@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Loading...</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Varadharajan Raghavendran – portfolio loading, redirecting to profile.">
+  <title>Varadharajan Raghavendran – Loading</title>
+  <link rel="stylesheet" type="text/css" href="preloader.css">
 </head>
 
-<body onload="myFunction()">
-    <link rel="stylesheet" type="text/css" href="preloader.css">
-<div class="loader">
+<body>
+  <!-- Accessible status announcement -->
+  <p role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">
+    Loading profile, please wait&hellip;
+  </p>
+
+  <!-- Decorative preloader (hidden from assistive technology) -->
+  <div class="loader" aria-hidden="true">
     <div class="line one"></div>
     <div class="line two"></div>
     <div class="line three"></div>
     <div class="line four"></div>
     <div class="line five"></div>
     <div class="line six"></div>
-</div>    
+  </div>
+
+  <!-- Fallback for users without JavaScript -->
+  <noscript>
+    <p style="text-align:center;padding:2rem;font-family:sans-serif;">
+      JavaScript is required for the preloader redirect.
+      <a href="profile.html">Click here to go to the portfolio.</a>
+    </p>
+  </noscript>
+
+  <script>
+    window.onload = function () {
+      function redirectToProfile() {
+        window.location.href = 'profile.html';
+      }
+      setTimeout(redirectToProfile, 5000);
+    };
+  </script>
 </body>
-<script>
-        window.onload=function() {
-        function foo()
-        {
-         window.location.href="https://mrchaos10.github.io/profile.html";
-        }
-        setInterval(foo,5000);
-        }
-</script>
 </html>
