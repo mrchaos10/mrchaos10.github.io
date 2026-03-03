@@ -1,0 +1,252 @@
+/* =====================================================
+   Portfolio Custom Styles
+   Now UI Dashboard – Static HTML Overrides & Extensions
+   ===================================================== */
+
+/* Skip link (ADA WCAG 2.4.1) */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  padding: .75rem 1.5rem;
+  background: #f96332;
+  color: #fff;
+  font-weight: 700;
+  z-index: 99999;
+  text-decoration: none;
+  transition: top .2s;
+}
+.skip-link:focus { top: 0; outline: 3px solid #ffdd00; outline-offset: 2px; }
+
+/* Visible focus rings (WCAG 2.4.7) */
+a:focus-visible, button:focus-visible,
+[role="button"]:focus-visible, input:focus-visible {
+  outline: 3px solid #f96332;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- Header ---- */
+.panel-header {
+  background: linear-gradient(195deg, #1a73e8 0%, #0d47a1 100%);
+  position: relative;
+  min-height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.panel-header-sm {
+  min-height: 120px;
+}
+.panel-header-lg {
+  min-height: 280px;
+}
+.header-content { color: #fff; padding: 1rem; }
+.header-title   { font-size: 2.6rem; font-weight: 700; margin-bottom: .4rem; }
+.header-subtitle { font-size: 1.1rem; opacity: .9; }
+.header-title-sm  { font-size: 1.8rem; font-weight: 700; margin-bottom: .25rem; }
+.header-subtitle-sm { font-size: .95rem; opacity: .9; }
+
+/* ---- Sidebar ---- */
+.sidebar { background: linear-gradient(195deg, #1e2f4a 0%, #13203a 100%); }
+.sidebar .logo { border-bottom: 1px solid rgba(255,255,255,.1); }
+.sidebar .nav .nav-link { color: rgba(255,255,255,.75); font-size: .875rem; }
+.sidebar .nav .nav-link:hover,
+.sidebar .nav-item.active .nav-link { color: #fff; background: rgba(255,255,255,.1); border-radius: 4px; }
+
+/* ---- Cards ---- */
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  margin-bottom: 1.5rem;
+}
+.card-user .avatar {
+  width: 100px; height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  margin-top: -50px;
+}
+.card-user .card-image img {
+  width: 100%; height: 150px; object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+.card-user .author { text-align: center; padding: 1rem 0 .5rem; }
+.card-user .title { font-size: 1.1rem; font-weight: 700; margin: .5rem 0 .25rem; }
+.card-user .description { color: #6c757d; }
+
+/* ---- Stats card ---- */
+.card-stats .icon-big { font-size: 2.5rem; }
+.card-stats .numbers .card-title { font-size: 1.4rem; font-weight: 700; }
+.card-stats .stats { font-size: .75rem; color: #9a9a9a; }
+
+/* ---- Skills ---- */
+.skill-tags { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.skill-tags li { display: inline; }
+.badge-pill { font-weight: 500; padding: .35em .75em; font-size: .8rem; }
+
+/* ---- Current Role Spotlight ---- */
+.stat-highlight { padding: 1rem; }
+.stat-number { font-size: 2rem; font-weight: 700; margin: 0; }
+
+/* ---- Accomplishment list ---- */
+.accomplishment-list { list-style: none; padding: 0; }
+.accomplishment-list li {
+  padding: .6rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  gap: .75rem;
+  align-items: flex-start;
+}
+.accomplishment-list li:last-child { border-bottom: none; }
+.accomplishment-list i { margin-top: .2rem; flex-shrink: 0; }
+
+/* ---- Section title ---- */
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a73e8;
+  margin-bottom: 1.25rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid #e8f0fe;
+}
+
+/* ---- Company cards ---- */
+.company-card .company-logo {
+  max-height: 60px;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+/* ---- Experience cards ---- */
+.exp-card {
+  border-left: 4px solid #1a73e8;
+  transition: box-shadow .2s;
+}
+.exp-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.12); }
+.exp-current { border-left-color: #f96332; }
+
+.exp-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.exp-logo-col { flex-shrink: 0; }
+.exp-logo {
+  width: 56px; height: 40px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: #f8f9fa;
+  padding: 4px;
+}
+.exp-title-col { flex: 1; }
+.exp-role    { font-size: 1.1rem; font-weight: 700; color: #1a73e8; margin: 0 0 .2rem; }
+.exp-current .exp-role { color: #e55a1c; }
+.exp-company { font-size: .95rem; font-weight: 600; color: #343a40; margin: 0 0 .4rem; }
+.exp-meta    { color: #6c757d; font-size: .85rem; display: flex; flex-wrap: wrap; gap: .75rem; margin: 0; }
+
+.exp-badge {
+  display: inline-block;
+  padding: .2rem .6rem;
+  border-radius: .25rem;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: .4rem;
+}
+.current-badge    { background: #f96332; color: #fff; }
+.internship-badge { background: #6c757d; color: #fff; }
+
+.exp-body { padding: .5rem 0; }
+.exp-body ul { padding-left: 1.2rem; }
+.exp-body li { margin-bottom: .4rem; line-height: 1.6; color: #495057; }
+.exp-section { margin-bottom: 1rem; }
+.exp-section-title {
+  font-size: .9rem;
+  font-weight: 700;
+  color: #495057;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: .4rem;
+}
+
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-top: .75rem;
+  padding-top: .75rem;
+  border-top: 1px solid #f0f0f0;
+}
+.exp-tag {
+  display: inline-block;
+  padding: .2rem .55rem;
+  background: #e8f0fe;
+  color: #1a73e8;
+  border: 1px solid #c5d8fd;
+  border-radius: 2rem;
+  font-size: .76rem;
+  font-weight: 600;
+}
+
+/* ---- Education cards ---- */
+.edu-card { margin-bottom: 1rem; }
+.edu-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.edu-icon { font-size: 2.5rem; color: #1a73e8; }
+.edu-degree { font-size: 1.1rem; font-weight: 700; color: #1a73e8; margin: 0 0 .2rem; }
+.edu-institution { font-size: .95rem; font-weight: 600; color: #343a40; margin: 0 0 .4rem; }
+.edu-gpa-col { margin-left: auto; }
+.gpa-badge {
+  background: linear-gradient(135deg, #1a73e8, #0d47a1);
+  color: #fff;
+  border-radius: 8px;
+  padding: .75rem 1.25rem;
+  text-align: center;
+}
+.gpa-number { display: block; font-size: 2rem; font-weight: 700; line-height: 1; }
+.gpa-label  { font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; opacity: .85; }
+
+.cert-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .5rem 0;
+}
+.cert-icon { font-size: 2rem; }
+.cert-title  { font-size: 1rem; font-weight: 600; margin: 0 0 .15rem; }
+.cert-issuer { font-size: .85rem; color: #6c757d; margin: 0; }
+
+/* ---- Footer ---- */
+.footer { background: #fff; border-top: 1px solid #f0f0f0; padding: 1.25rem 0; }
+.footer-menu {
+  list-style: none; padding: 0; margin: 0 0 .5rem;
+  display: flex; gap: 1.5rem; flex-wrap: wrap;
+}
+.footer-menu a { color: #6c757d; font-size: .85rem; text-decoration: none; }
+.footer-menu a:hover { color: #1a73e8; }
+.copyright { font-size: .8rem; color: #9a9a9a; }
+
+/* ---- Reduced motion (WCAG 2.3.3) ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 991px) {
+  .wrapper { flex-direction: column; }
+  .sidebar { position: static; width: 100%; height: auto; }
+  .main-panel { width: 100%; }
+  .header-title { font-size: 1.8rem; }
+  .exp-header { flex-direction: column; }
+}
