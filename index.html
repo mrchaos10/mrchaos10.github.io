@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Varadharajan Raghavendran – Senior Consultant Staff Engineer at Visa Inc. Portfolio IDE.">
+  <title>Varadharajan R – Portfolio</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1e1e1e;--surface:#2b2b2b;--surface2:#3c3f41;--surface3:#4a4a4a;
+  --border:#4a4a4a;--border2:#555;--text:#a9b7c6;--text-dim:#6c7b8b;
+  --text-bright:#e0e0e0;--text-white:#fff;
+  --kw:#cc7832;--str:#6a8759;--num:#6897bb;--comment:#7f848e;
+  --fn:#ffc66d;--type:#a9b7c6;--anno:#bbb529;--param:#9876aa;
+  --accent:#2d6a9f;--accent-h:#4b9fea;--select:rgba(75,110,175,.3);
+  --teal:#4ec9b0;--red:#f44747;--yellow:#ffc66d;--green:#6a8759;
+  --title-h:28px;--menu-h:26px;--tab-h:36px;--bottom-h:220px;--status-h:22px;
+  --sidebar-w:240px;--font:'JetBrains Mono',monospace;--ui:'Inter',sans-serif;
+}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--font);font-size:13px}
+
+/* ── IDE WINDOW ── */
+#ide{display:flex;flex-direction:column;height:100vh;width:100vw;overflow:hidden}
+
+/* ── TITLE BAR ── */
+.title-bar{
+  height:var(--title-h);background:#3c3f41;display:flex;align-items:center;
+  padding:0 10px;flex-shrink:0;border-bottom:1px solid #2b2b2b;user-select:none;
+}
+.win-controls{display:flex;gap:7px;margin-right:16px}
+.dot{width:12px;height:12px;border-radius:50%;cursor:pointer;transition:filter .15s}
+.dot.close{background:#ff5f57}.dot.close:hover{filter:brightness(1.2)}
+.dot.minimize{background:#febc2e}.dot.minimize:hover{filter:brightness(1.2)}
+.dot.maximize{background:#28c840}.dot.maximize:hover{filter:brightness(1.2)}
+.title-text{flex:1;text-align:center;font-size:12px;color:#a0a8b0;letter-spacing:.3px}
+.title-text .t-proj{color:#ffc66d;font-weight:600}
+.title-text .t-file{color:#e0e0e0}
+.title-text .t-app{color:#6c7b8b}
+
+/* ── MENU BAR ── */
+.menu-bar{
+  height:var(--menu-h);background:#3c3f41;display:flex;align-items:center;
+  padding:0 6px;flex-shrink:0;border-bottom:1px solid #2b2b2b;gap:2px;
+}
+.menu-item{
+  padding:2px 8px;border-radius:3px;font-size:12px;color:#a9b7c6;cursor:pointer;
+  white-space:nowrap;transition:background .12s;
+}
+.menu-item:hover{background:#4a4f54}
+.menu-item.search-btn{
+  margin-left:auto;display:flex;align-items:center;gap:6px;
+  background:#2b2b2b;border:1px solid #555;padding:2px 10px;border-radius:4px;
+  color:#6c7b8b;font-size:11px;min-width:200px;
+}
+.menu-item.search-btn kbd{margin-left:auto;font-size:10px;opacity:.5}
+.menu-right{margin-left:8px;display:flex;align-items:center;gap:4px}
+
+/* ── WORKSPACE ── */
+.workspace{flex:1;display:flex;overflow:hidden;min-height:0}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sidebar-w);background:#252526;flex-shrink:0;display:flex;flex-direction:column;
+  border-right:1px solid var(--border);overflow:hidden;transition:width .2s;
+}
+.sidebar.collapsed{width:0}
+.sidebar-header{
+  padding:6px 10px;background:#2d2d30;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);font-size:11px;font-weight:600;color:#a0a8b0;
+  text-transform:uppercase;letter-spacing:.8px;flex-shrink:0;font-family:var(--ui);
+}
+.sidebar-icons{display:flex;gap:8px;color:#6c7b8b}
+.sidebar-icons i{cursor:pointer;font-size:11px;transition:color .12s}
+.sidebar-icons i:hover{color:#a9b7c6}
+.file-tree{overflow-y:auto;flex:1;padding:4px 0}
+.tree-item{
+  display:flex;align-items:center;gap:5px;padding:3px 8px;cursor:pointer;
+  white-space:nowrap;font-size:12px;transition:background .1s;
+}
+.tree-item:hover{background:#2a2d2e}
+.tree-item.active{background:#094771}
+.tree-item.root{font-weight:600;color:#e0e0e0;padding-left:4px}
+.tree-toggle{width:14px;display:flex;align-items:center;justify-content:center;color:#6c7b8b;font-size:9px}
+.folder-icon{color:#dca832;font-size:13px}
+.file-icon{font-size:12px}
+.java-icon{color:#cc7832}
+.md-icon{color:#6a8759}
+.ts-icon{color:#4ec9b0}
+.json-icon{color:#ffc66d}
+.pdf-icon{color:#f44747}
+.tree-name{flex:1;overflow:hidden;text-overflow:ellipsis}
+.tree-children .tree-item{padding-left:28px}
+.tree-section{
+  padding:10px 10px 4px;font-size:10px;color:#6c7b8b;text-transform:uppercase;
+  letter-spacing:.8px;font-family:var(--ui);margin-top:4px;
+}
+
+/* ── EDITOR AREA ── */
+.editor-area{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+
+/* ── TAB BAR ── */
+.tab-bar{
+  height:var(--tab-h);background:#2d2d30;display:flex;align-items:flex-end;
+  flex-shrink:0;border-bottom:1px solid var(--border);overflow-x:auto;overflow-y:hidden;
+  scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  display:flex;align-items:center;gap:6px;padding:0 14px;height:calc(var(--tab-h) - 2px);
+  background:#252526;border-right:1px solid var(--border);color:#6c7b8b;
+  cursor:pointer;white-space:nowrap;font-size:12px;transition:background .12s;
+  border-top:2px solid transparent;flex-shrink:0;
+}
+.tab:hover{background:#2a2d2e;color:#a9b7c6}
+.tab.active{background:#1e1e1e;color:#e0e0e0;border-top-color:#4b9fea}
+.tab-close{
+  width:16px;height:16px;display:flex;align-items:center;justify-content:center;
+  border-radius:3px;font-size:10px;color:#6c7b8b;margin-left:4px;
+}
+.tab-close:hover{background:#4a4f54;color:#e0e0e0}
+.tab-icon{font-size:11px}
+
+/* ── EDITOR CONTENT ── */
+.editor-content{flex:1;overflow:auto;background:var(--surface);position:relative}
+.editor-content::-webkit-scrollbar{width:8px;height:8px}
+.editor-content::-webkit-scrollbar-track{background:#252526}
+.editor-content::-webkit-scrollbar-thumb{background:#4a4f54;border-radius:4px}
+
+/* ── WELCOME SCREEN ── */
+.welcome{display:flex;height:100%;min-height:400px}
+.welcome-left{
+  width:280px;flex-shrink:0;background:linear-gradient(160deg,#0e3a5e 0%,#1a2a3a 100%);
+  padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;
+  border-right:1px solid var(--border);
+}
+.avatar{
+  width:90px;height:90px;border-radius:50%;background:#1a3a5c;border:3px solid #4b9fea;
+  display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;
+  color:#4b9fea;margin-bottom:16px;font-family:var(--ui);
+}
+.welcome-name{font-size:16px;font-weight:700;color:#e0e0e0;font-family:var(--ui);line-height:1.3}
+.welcome-role{font-size:11px;color:#4b9fea;margin-top:4px;font-family:var(--ui)}
+.welcome-company{font-size:11px;color:#a9b7c6;margin-top:2px;font-family:var(--ui)}
+.welcome-loc{font-size:11px;color:#6c7b8b;margin-top:2px;font-family:var(--ui)}
+.welcome-divider{width:40px;height:2px;background:#4b9fea;margin:16px auto;border-radius:1px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-top:4px}
+.stat-box{
+  background:rgba(255,255,255,.05);border:1px solid rgba(75,159,234,.2);border-radius:6px;
+  padding:10px 8px;text-align:center;
+}
+.stat-num{font-size:18px;font-weight:700;color:#4b9fea;font-family:var(--ui)}
+.stat-lbl{font-size:10px;color:#6c7b8b;margin-top:2px;font-family:var(--ui)}
+.welcome-social{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;justify-content:center}
+.w-social-link{
+  width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:center;color:#a9b7c6;font-size:14px;
+  text-decoration:none;transition:background .15s,color .15s;
+}
+.w-social-link:hover{background:#4b9fea;color:#fff}
+.welcome-right{flex:1;padding:32px 32px 24px;overflow-y:auto}
+.welcome-right::-webkit-scrollbar{width:8px}
+.welcome-right::-webkit-scrollbar-track{background:#252526}
+.welcome-right::-webkit-scrollbar-thumb{background:#4a4f54;border-radius:4px}
+.welcome-heading{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#6c7b8b;font-family:var(--ui);margin-bottom:12px}
+.file-launcher{display:flex;flex-direction:column;gap:4px;margin-bottom:28px}
+.launch-item{
+  display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:6px;
+  cursor:pointer;transition:background .12s;border:1px solid transparent;
+}
+.launch-item:hover{background:#2a2d2e;border-color:var(--border)}
+.launch-icon{font-size:14px;width:20px;text-align:center}
+.launch-name{flex:1;color:#e0e0e0;font-size:13px}
+.launch-file{font-size:11px;color:#6c7b8b}
+.launch-cmd{font-size:11px;color:#6c7b8b;font-family:var(--font)}
+.welcome-tip{
+  background:#2d2d30;border:1px solid var(--border);border-radius:6px;padding:14px;
+}
+.tip-title{font-size:11px;color:#ffc66d;margin-bottom:8px;font-family:var(--ui);font-weight:600}
+.tip-line{font-size:12px;color:#a9b7c6;margin-bottom:4px}
+.tip-line code{color:#ffc66d;background:#1e1e1e;padding:1px 5px;border-radius:3px}
+
+/* ── FILE CONTENT VIEW ── */
+.file-view{display:flex;min-height:100%}
+.line-numbers{
+  padding:14px 0;background:#252526;border-right:1px solid var(--border);
+  text-align:right;user-select:none;flex-shrink:0;min-width:44px;
+}
+.ln{padding:0 10px;color:#4a5568;font-size:12px;line-height:1.7}
+.code-area{padding:14px 20px;flex:1;overflow:visible;line-height:1.7;font-size:13px}
+.code-line{display:block;white-space:pre-wrap;word-break:break-word}
+.kw{color:var(--kw)}.str{color:var(--str)}.num{color:var(--num)}
+.cmt{color:var(--comment);font-style:italic}.fn{color:var(--fn)}
+.anno{color:var(--anno)}.param{color:var(--param)}.teal{color:var(--teal)}
+.dim{color:var(--text-dim)}.bright{color:var(--text-bright)}
+.tag{
+  display:inline-block;background:#1a3244;border:1px solid #2d5a8a;color:#4b9fea;
+  border-radius:3px;padding:1px 7px;font-size:11px;margin:2px 3px;font-family:var(--ui);
+}
+.tag.green{background:#1a3a22;border-color:#2d6a3f;color:#6a8759}
+.tag.orange{background:#3a2a10;border-color:#6a4a1f;color:#cc7832}
+.tag.teal{background:#0d2e2b;border-color:#1a5a52;color:#4ec9b0}
+.tag.purple{background:#2a1a3a;border-color:#4a2a6a;color:#9876aa}
+.badge-current{
+  display:inline-block;background:#1a4a2a;border:1px solid #2d8050;color:#6fcf97;
+  border-radius:3px;padding:1px 8px;font-size:11px;margin-bottom:4px;font-family:var(--ui);
+}
+.badge-intern{
+  display:inline-block;background:#2a2a1a;border:1px solid #6a6a1f;color:#ffc66d;
+  border-radius:3px;padding:1px 8px;font-size:11px;margin-bottom:4px;font-family:var(--ui);
+}
+.section-block{
+  margin:8px 0;padding:12px 16px;background:#252526;border:1px solid var(--border);
+  border-radius:6px;border-left:3px solid #4b9fea;
+}
+.section-block.green-border{border-left-color:#6a8759}
+.section-block.orange-border{border-left-color:#cc7832}
+.section-block.purple-border{border-left-color:#9876aa}
+.section-block.teal-border{border-left-color:#4ec9b0}
+.section-block h3{font-size:14px;color:#e0e0e0;margin-bottom:4px;font-family:var(--ui);font-weight:600}
+.section-block h4{font-size:12px;color:#6a8759;margin-bottom:6px;font-family:var(--ui)}
+.section-block .meta{font-size:11px;color:#6c7b8b;margin-bottom:8px;font-family:var(--ui)}
+.section-block .meta i{margin-right:4px}
+.section-block ul{margin:0 0 0 16px;padding:0}
+.section-block ul li{color:#a9b7c6;font-size:12px;margin-bottom:3px;font-family:var(--ui);line-height:1.5}
+.section-block ul li strong{color:#e0e0e0}
+.section-block .tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px}
+.proj-card-ide{
+  margin:8px 0;background:#252526;border:1px solid var(--border);border-radius:6px;
+  overflow:hidden;transition:border-color .15s;
+}
+.proj-card-ide:hover{border-color:#4b9fea}
+.proj-card-ide .pci-header{
+  padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);
+  background:#2a2d2e;
+}
+.lang-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.lang-label{font-size:11px;color:#6c7b8b;font-family:var(--ui)}
+.gh-link{margin-left:auto;color:#6c7b8b;font-size:13px;text-decoration:none}
+.gh-link:hover{color:#e0e0e0}
+.pci-body{padding:12px 14px}
+.pci-body h3{font-size:13px;color:#e0e0e0;margin-bottom:5px;font-family:var(--ui);font-weight:600}
+.pci-body p{font-size:12px;color:#a9b7c6;font-family:var(--ui);line-height:1.5;margin-bottom:8px}
+.pci-body .tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.pci-footer{
+  padding:8px 14px;display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--border);background:#252526;
+}
+.pci-footer .year{font-size:11px;color:#6c7b8b;font-family:var(--ui)}
+.pci-footer a{font-size:11px;color:#4b9fea;text-decoration:none;font-family:var(--ui)}
+.pci-footer a:hover{text-decoration:underline}
+.proj-grid-ide{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.skill-group{margin-bottom:16px}
+.skill-group-title{
+  font-size:11px;color:#ffc66d;text-transform:uppercase;letter-spacing:.6px;
+  margin-bottom:8px;font-family:var(--ui);font-weight:600;
+}
+.skill-pills{display:flex;flex-wrap:wrap;gap:5px}
+.skill-pill{
+  background:#2a2d2e;border:1px solid var(--border);border-radius:4px;
+  padding:3px 10px;font-size:12px;color:#a9b7c6;font-family:var(--ui);
+  transition:background .12s,border-color .12s,color .12s;cursor:default;
+}
+.skill-pill:hover{background:#1a3244;border-color:#4b9fea;color:#4b9fea}
+.cert-item-ide{
+  display:flex;align-items:center;gap:12px;padding:10px 14px;
+  border-bottom:1px solid var(--border);
+}
+.cert-item-ide:last-child{border-bottom:none}
+.cert-item-ide .cert-icon-i{font-size:18px;width:24px;text-align:center;flex-shrink:0}
+.cert-item-ide .cert-info-i{flex:1}
+.cert-item-ide .cert-info-i h4{font-size:12px;color:#e0e0e0;font-family:var(--ui);margin-bottom:2px}
+.cert-item-ide .cert-info-i h4 a{color:#4b9fea;text-decoration:none}
+.cert-item-ide .cert-info-i h4 a:hover{text-decoration:underline}
+.cert-item-ide .cert-info-i p{font-size:11px;color:#6c7b8b;font-family:var(--ui)}
+.md-h1{font-size:20px;color:var(--teal);font-weight:700;margin:8px 0 4px;font-family:var(--ui)}
+.md-h2{font-size:15px;color:var(--accent-h);font-weight:600;margin:16px 0 8px;font-family:var(--ui);padding-bottom:6px;border-bottom:1px solid var(--border)}
+.md-h3{font-size:13px;color:var(--fn);font-weight:600;margin:12px 0 6px;font-family:var(--ui)}
+.md-p{font-size:13px;color:var(--text);line-height:1.7;margin-bottom:10px;font-family:var(--ui)}
+.md-ul{margin:0 0 12px 20px;padding:0}
+.md-ul li{color:var(--text);font-size:13px;line-height:1.7;margin-bottom:3px;font-family:var(--ui)}
+.md-code{background:#1e1e1e;border:1px solid var(--border);border-radius:4px;padding:2px 6px;color:var(--fn);font-family:var(--font);font-size:12px}
+.md-blockquote{
+  border-left:3px solid #4b9fea;padding:6px 14px;margin:10px 0;
+  background:#252526;color:#a9b7c6;font-style:italic;font-family:var(--ui);
+}
+.contact-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:12px 0}
+.contact-link{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:#252526;border:1px solid var(--border);border-radius:6px;
+  text-decoration:none;transition:border-color .15s,background .15s;
+}
+.contact-link:hover{border-color:#4b9fea;background:#1a2a3a}
+.contact-link .cl-icon{font-size:16px;width:20px;text-align:center}
+.contact-link .cl-text h4{font-size:12px;color:#e0e0e0;font-family:var(--ui);margin:0}
+.contact-link .cl-text p{font-size:11px;color:#6c7b8b;font-family:var(--ui);margin:0}
+
+/* ── BOTTOM PANEL ── */
+.bottom-panel{
+  height:var(--bottom-h);background:#1e1e1e;display:flex;flex-direction:column;
+  border-top:1px solid var(--border);flex-shrink:0;
+}
+.panel-header{
+  height:28px;background:#2d2d30;display:flex;align-items:center;
+  border-bottom:1px solid var(--border);flex-shrink:0;padding:0 6px;
+}
+.panel-tabs{display:flex;height:100%}
+.panel-tab{
+  display:flex;align-items:center;gap:6px;padding:0 14px;font-size:12px;
+  color:#6c7b8b;cursor:pointer;border-bottom:2px solid transparent;transition:color .12s;
+}
+.panel-tab:hover{color:#a9b7c6}
+.panel-tab.active{color:#e0e0e0;border-bottom-color:#4b9fea}
+.panel-badge{background:#3a3a3a;border-radius:3px;padding:0 5px;font-size:10px;color:#6c7b8b}
+.panel-actions{margin-left:auto;display:flex;align-items:center;gap:8px;color:#6c7b8b;font-size:12px}
+.panel-actions i{cursor:pointer;transition:color .12s}
+.panel-actions i:hover{color:#a9b7c6}
+.terminal{flex:1;padding:8px 14px;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.term-output{flex:1;overflow-y:auto;font-size:12px;line-height:1.6;margin-bottom:6px}
+.term-output::-webkit-scrollbar{width:6px}
+.term-output::-webkit-scrollbar-track{background:transparent}
+.term-output::-webkit-scrollbar-thumb{background:#4a4f54;border-radius:3px}
+.term-line{display:block;color:#a9b7c6}
+.term-line.success{color:#6a8759}
+.term-line.error{color:#f44747}
+.term-line.info{color:#ffc66d}
+.term-line.cmd{color:#e0e0e0}
+.term-input-row{display:flex;align-items:center;gap:8px;position:relative;flex-shrink:0}
+.term-prompt-text{color:#4b9fea;white-space:nowrap;flex-shrink:0}
+.term-prompt-text .prompt-at{color:#6c7b8b}
+.term-prompt-text .prompt-host{color:#4ec9b0}
+.term-input-wrap{flex:1;position:relative}
+#termInput{
+  width:100%;background:transparent;border:none;outline:none;caret-color:#e0e0e0;
+  color:#e0e0e0;font-family:var(--font);font-size:12px;line-height:1.6;
+}
+.autocomplete{
+  position:absolute;bottom:calc(100% + 4px);left:0;background:#252526;
+  border:1px solid #555;border-radius:4px;min-width:280px;max-height:200px;
+  overflow-y:auto;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.5);display:none;
+}
+.ac-item{
+  display:flex;align-items:center;gap:10px;padding:7px 12px;cursor:pointer;
+  transition:background .1s;
+}
+.ac-item:hover,.ac-item.selected{background:#094771}
+.ac-cmd{color:#4b9fea;font-size:12px;min-width:110px}
+.ac-desc{color:#6c7b8b;font-size:11px;font-family:var(--ui)}
+
+/* ── STATUS BAR ── */
+.status-bar{
+  height:var(--status-h);background:#007acc;display:flex;align-items:center;
+  padding:0 8px;flex-shrink:0;font-size:11px;color:#fff;
+}
+.status-item{
+  display:flex;align-items:center;gap:4px;padding:0 8px;height:100%;
+  cursor:default;transition:background .12s;white-space:nowrap;
+}
+.status-item:hover{background:rgba(255,255,255,.1)}
+.status-item i{font-size:10px}
+.status-right{margin-left:auto;display:flex;align-items:center}
+
+/* ── SCROLLBARS ── */
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:#252526}
+::-webkit-scrollbar-thumb{background:#4a4f54;border-radius:4px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  :root{--sidebar-w:0px;--bottom-h:180px}
+  .sidebar{display:none}
+  .sidebar.mobile-open{display:flex;position:fixed;top:0;left:0;height:100%;z-index:200;width:240px}
+  .welcome{flex-direction:column}
+  .welcome-left{width:100%;flex-direction:row;text-align:left;align-items:center;gap:16px;padding:20px}
+  .welcome-left .stat-grid{display:none}
+  .welcome-left .welcome-divider{display:none}
+  .welcome-social{margin-top:0}
+  .welcome-right{padding:16px}
+  .menu-item:not(.search-btn){display:none}
+  .proj-grid-ide{grid-template-columns:1fr}
+  .contact-links{grid-template-columns:1fr}
+  .mob-btn{display:flex!important}
+}
+.mob-btn{
+  display:none;position:fixed;bottom:230px;left:8px;z-index:50;
+  background:#3c3f41;border:1px solid var(--border);border-radius:4px;
+  padding:6px 8px;cursor:pointer;color:#a9b7c6;font-size:12px;
+}
+</style>
+</head>
+<body>
+<div id="ide">
+
+  <!-- TITLE BAR -->
+  <div class="title-bar">
+    <div class="win-controls">
+      <span class="dot close" title="Close"></span>
+      <span class="dot minimize" title="Minimize"></span>
+      <span class="dot maximize" title="Maximize"></span>
+    </div>
+    <div class="title-text">
+      <span class="t-proj">portfolio</span>
+      <span style="color:#4a5568"> &mdash; </span>
+      <span class="t-file" id="titleFile">Welcome</span>
+      <span style="color:#4a5568"> &mdash; </span>
+      <span class="t-app">IntelliJ IDEA (Darcula)</span>
+    </div>
+  </div>
+
+  <!-- MENU BAR -->
+  <div class="menu-bar">
+    <span class="menu-item">File</span>
+    <span class="menu-item">Edit</span>
+    <span class="menu-item">View</span>
+    <span class="menu-item">Navigate</span>
+    <span class="menu-item">Code</span>
+    <span class="menu-item">Run</span>
+    <span class="menu-item">Tools</span>
+    <span class="menu-item search-btn" onclick="focusTerminal()" style="cursor:pointer">
+      <i class="fas fa-search" style="font-size:11px"></i>
+      <span>Search or type /help&hellip;</span>
+      <kbd>Ctrl K</kbd>
+    </span>
+    <div class="menu-right">
+      <span class="menu-item" title="Toggle Sidebar" onclick="toggleSidebar()" style="cursor:pointer">
+        <i class="fas fa-columns"></i>
+      </span>
+    </div>
+  </div>
+
+  <!-- WORKSPACE -->
+  <div class="workspace">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span>Project</span>
+        <div class="sidebar-icons">
+          <i class="fas fa-sync-alt" title="Refresh" onclick="focusTerminal()"></i>
+          <i class="fas fa-compress-arrows-alt" title="Collapse sidebar" onclick="toggleSidebar()"></i>
+        </div>
+      </div>
+      <div class="file-tree">
+        <div class="tree-item root">
+          <span class="tree-toggle"><i class="fas fa-chevron-down" style="font-size:9px"></i></span>
+          <i class="fas fa-folder-open folder-icon"></i>
+          <span class="tree-name">portfolio [mrchaos10]</span>
+        </div>
+        <div class="tree-section">Source Files</div>
+        <div class="tree-item" id="tree-about" onclick="openFile('about')">
+          <span style="width:16px;display:inline-block"></span>
+          <i class="fas fa-file-alt file-icon md-icon"></i>
+          <span class="tree-name" style="margin-left:5px">About.md</span>
+        </div>
+        <div class="tree-item" id="tree-experience" onclick="openFile('experience')">
+          <span style="width:16px;display:inline-block"></span>
+          <i class="fas fa-file-code file-icon java-icon"></i>
+          <span class="tree-name" style="margin-left:5px">Experience.java</span>
+        </div>
+        <div class="tree-item" id="tree-education" onclick="openFile('education')">
+          <span style="width:16px;display:inline-block"></span>
+          <i class="fas fa-file-alt file-icon md-icon"></i>
+          <span class="tree-name" style="margin-left:5px">Education.md</span>
+        </div>
+        <div class="tree-item" id="tree-projects" onclick="openFile('projects')">
+          <span style="width:16px;display:inline-block"></span>
+          <i class="fas fa-file-code file-icon ts-icon"></i>
+          <span class="tree-name" style="margin-left:5px">Projects.ts</span>
+        </div>
+        <div class="tree-item" id="tree-skills" onclick="openFile('skills')">
+          <span style="width:16px;display:inline-block"></span>
+          <i class="fas fa-file-code file-icon json-icon"></i>
+          <span class="tree-name" style="margin-left:5px">skills.json</span>
+        </div>
+        <div class="tree-item" id="tree-certifications" onclick="openFile('certifications')">
+          <span style="width:16px;display:inline-block"></span>
+          <i class="fas fa-file-alt file-icon md-icon"></i>
+          <span class="tree-name" style="margin-left:5px">Certifications.md</span>
+        </div>
+        <div class="tree-item" id="tree-contact" onclick="openFile('contact')">
+          <span style="width:16px;display:inline-block"></span>
+          <i class="fas fa-file-alt file-icon md-icon"></i>
+          <span class="tree-name" style="margin-left:5px">Contact.md</span>
+        </div>
+        <div class="tree-section">Resources</div>
+        <div class="tree-item" onclick="window.open('Resume.pdf','_blank')">
+          <span style="width:16px;display:inline-block"></span>
+          <i class="fas fa-file-pdf file-icon pdf-icon"></i>
+          <span class="tree-name" style="margin-left:5px">Resume.pdf</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDITOR AREA -->
+    <div class="editor-area">
+      <div class="tab-bar" id="tabBar">
+        <div class="tab active" data-file="welcome" onclick="switchTab('welcome')">
+          <i class="fas fa-home tab-icon" style="color:#6c7b8b"></i>
+          <span style="margin-left:5px">Welcome</span>
+        </div>
+      </div>
+      <div class="editor-content" id="editorContent"></div>
+    </div>
+
+  </div><!-- /workspace -->
+
+  <!-- BOTTOM PANEL -->
+  <div class="bottom-panel" id="bottomPanel">
+    <div class="panel-header">
+      <div class="panel-tabs">
+        <span class="panel-tab active">
+          <i class="fas fa-terminal" style="font-size:10px"></i>&nbsp;Terminal
+        </span>
+        <span class="panel-tab">
+          Problems <span class="panel-badge">0</span>
+        </span>
+      </div>
+      <div class="panel-actions">
+        <i class="fas fa-minus" title="Minimize" onclick="togglePanel()"></i>
+        <i class="fas fa-times" title="Close" onclick="togglePanel()"></i>
+      </div>
+    </div>
+    <div class="terminal" id="terminalBody">
+      <div class="term-output" id="termOutput"></div>
+      <div class="term-input-row">
+        <span class="term-prompt-text">
+          <span class="prompt-at">varadharajan</span>@<span class="prompt-host">portfolio</span>:~$&nbsp;
+        </span>
+        <div class="term-input-wrap">
+          <input type="text" id="termInput" autocomplete="off" spellcheck="false"
+                 placeholder="type /help to get started&hellip;" aria-label="Terminal input"/>
+          <div class="autocomplete" id="autocomplete"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <div style="display:flex;align-items:center">
+      <span class="status-item"><i class="fas fa-code-branch"></i>&nbsp;main</span>
+      <span class="status-item"><i class="fas fa-check-circle"></i>&nbsp;No Problems</span>
+    </div>
+    <div class="status-right">
+      <span class="status-item" id="statusFile">Welcome</span>
+      <span class="status-item">Staff Engineer @ Visa Inc.</span>
+      <span class="status-item"><i class="fas fa-map-marker-alt"></i>&nbsp;Bangalore, India</span>
+      <span class="status-item">UTF-8</span>
+    </div>
+  </div>
+
+</div><!-- /ide -->
+
+<button class="mob-btn" onclick="toggleSidebar()" title="Toggle file tree">
+  <i class="fas fa-folder-open"></i>
+</button>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   Portfolio IDE — Core Logic
+   ══════════════════════════════════════════════════════ */
+
+let openTabs = ['welcome'];
+let activeTab = 'welcome';
+let cmdHistory = [];
+let histIdx = -1;
+let acIdx = -1;
+let panelVisible = true;
+
+const FILES = {
+  welcome:       {label:'Welcome',           icon:'fa-home',        iconCls:'',          ext:''},
+  about:         {label:'About.md',          icon:'fa-file-alt',    iconCls:'md-icon',   ext:'.md'},
+  experience:    {label:'Experience.java',   icon:'fa-file-code',   iconCls:'java-icon', ext:'.java'},
+  education:     {label:'Education.md',      icon:'fa-file-alt',    iconCls:'md-icon',   ext:'.md'},
+  projects:      {label:'Projects.ts',       icon:'fa-file-code',   iconCls:'ts-icon',   ext:'.ts'},
+  skills:        {label:'skills.json',       icon:'fa-file-code',   iconCls:'json-icon', ext:'.json'},
+  certifications:{label:'Certifications.md', icon:'fa-file-alt',    iconCls:'md-icon',   ext:'.md'},
+  contact:       {label:'Contact.md',        icon:'fa-file-alt',    iconCls:'md-icon',   ext:'.md'},
+};
+
+const COMMANDS = [
+  {cmd:'/about',          desc:'Open About.md'},
+  {cmd:'/experience',     desc:'Open Experience.java'},
+  {cmd:'/education',      desc:'Open Education.md'},
+  {cmd:'/projects',       desc:'Open Projects.ts'},
+  {cmd:'/skills',         desc:'Open skills.json'},
+  {cmd:'/certifications', desc:'Open Certifications.md'},
+  {cmd:'/certs',          desc:'Alias \u2192 /certifications'},
+  {cmd:'/contact',        desc:'Open Contact.md'},
+  {cmd:'/resume',         desc:'Download Resume PDF'},
+  {cmd:'/help',           desc:'Show available commands'},
+  {cmd:'ls',              desc:'List all sections'},
+  {cmd:'whoami',          desc:'Quick identity summary'},
+  {cmd:'clear',           desc:'Clear terminal output'},
+];
+
+/* ── CONTENT RENDERERS ── */
+
+function renderWelcome() {
+  return '<div class="welcome">' +
+  '<div class="welcome-left">' +
+    '<div class="avatar">VR</div>' +
+    '<div class="welcome-name">Varadharajan Raghavendran</div>' +
+    '<div class="welcome-role">Senior Consultant Staff Engineer</div>' +
+    '<div class="welcome-company">Visa Inc. &middot; SDE-4</div>' +
+    '<div class="welcome-loc"><i class="fas fa-map-marker-alt" style="margin-right:4px"></i>Bangalore, India</div>' +
+    '<div class="welcome-divider"></div>' +
+    '<div class="stat-grid">' +
+      '<div class="stat-box"><div class="stat-num">7+</div><div class="stat-lbl">Years @ Visa</div></div>' +
+      '<div class="stat-box"><div class="stat-num">2</div><div class="stat-lbl">USPTO Patents</div></div>' +
+      '<div class="stat-box"><div class="stat-num">CKAD</div><div class="stat-lbl">Certified</div></div>' +
+      '<div class="stat-box"><div class="stat-num">9.3</div><div class="stat-lbl">CGPA (BE)</div></div>' +
+    '</div>' +
+    '<div class="welcome-social">' +
+      '<a class="w-social-link" href="https://github.com/mrchaos10" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>' +
+      '<a class="w-social-link" href="https://in.linkedin.com/in/varadharajan-raghavendran-bb3299167" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>' +
+      '<a class="w-social-link" href="https://twitter.com/mr_chaos_10" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>' +
+      '<a class="w-social-link" href="https://mrchaos10.blogspot.com/" target="_blank" title="Blog"><i class="fas fa-blog"></i></a>' +
+      '<a class="w-social-link" href="Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-pdf"></i></a>' +
+    '</div>' +
+  '</div>' +
+  '<div class="welcome-right">' +
+    '<div class="welcome-heading">Open a section</div>' +
+    '<div class="file-launcher">' +
+    launchItem('about','About','About.md','/about','fa-user','#6a8759') +
+    launchItem('experience','Experience','Experience.java','/experience','fa-briefcase','#cc7832') +
+    launchItem('education','Education','Education.md','/education','fa-graduation-cap','#4ec9b0') +
+    launchItem('projects','Projects','Projects.ts','/projects','fa-code','#4ec9b0') +
+    launchItem('skills','Skills','skills.json','/skills','fa-layer-group','#ffc66d') +
+    launchItem('certifications','Certifications','Certifications.md','/certifications','fa-certificate','#bbb529') +
+    launchItem('contact','Contact','Contact.md','/contact','fa-envelope','#9876aa') +
+    '</div>' +
+    '<div class="welcome-tip">' +
+      '<div class="tip-title"><i class="fas fa-lightbulb" style="margin-right:6px"></i>Getting Started</div>' +
+      '<div class="tip-line">Use the terminal below &mdash; type <code>/help</code> to see all commands.</div>' +
+      '<div class="tip-line" style="margin-top:4px">Try <code>/experience</code> or click any file in the Project tree on the left.</div>' +
+      '<div class="tip-line" style="margin-top:4px">Press <code>&uarr;</code> / <code>&darr;</code> in the terminal to navigate command history.</div>' +
+    '</div>' +
+  '</div>' +
+  '</div>';
+}
+
+function launchItem(f, name, fname, cmd, icon, color) {
+  return '<div class="launch-item" onclick="openFile(\''+f+'\')">'+
+    '<i class="fas '+icon+' launch-icon" style="color:'+color+'"></i>'+
+    '<span class="launch-name">'+name+'</span>'+
+    '<span class="launch-file">'+fname+'</span>'+
+    '<span class="launch-cmd">'+cmd+'</span>'+
+  '</div>';
+}
+
+function codeView(lines) {
+  var lnHtml = lines.map(function(_,i){return '<div class="ln">'+(i+1)+'</div>';}).join('');
+  var codeHtml = lines.map(function(l){return '<div class="code-line">'+l+'</div>';}).join('');
+  return '<div class="file-view"><div class="line-numbers">'+lnHtml+'</div><div class="code-area">'+codeHtml+'</div></div>';
+}
+
+function renderAbout() {
+  return codeView([
+    '<span class="cmt"># About.md &mdash; Varadharajan Raghavendran</span>',
+    '',
+    '<span class="md-h1"># Varadharajan Raghavendran</span>',
+    '<div class="md-blockquote">Senior Consultant Staff Engineer &middot; Visa Inc. &middot; SDE-4<br>Distributed Systems &bull; Event-Driven Architecture &bull; Full Stack &bull; AI</div>',
+    '',
+    '<span class="md-h2">## Who am I?</span>',
+    '<p class="md-p">Staff Engineer with <strong style="color:#e0e0e0">7+ years at Visa Inc.</strong>, building mission-critical fintech platforms that process billions of payment events. I own distributed systems architecture, lead engineering teams, and ship AI-assisted tooling that actually saves time in production.</p>',
+    '',
+    '<span class="md-h2">## Core Strengths</span>',
+    '<ul class="md-ul"><li><span class="teal">Event-Driven Architecture</span> &mdash; Apache Kafka, 300&ndash;500 events/sec per pod, sub-50ms P95 latency</li><li><span class="kw">Domain-Driven Design</span> &mdash; decomposed onboarding into 10+ bounded-context services</li><li><span class="fn">AI-Assisted Engineering</span> &mdash; Claude Code, RAG pipelines, LLM-driven compliance automation</li><li><span class="str">Full Stack</span> &mdash; Java / Spring Boot &rarr; React microfrontends; gRPC / REST APIs</li><li><span class="teal">Performance Obsession</span> &mdash; reduced P99 latency 20&ndash;25%, boosted concurrency 2&ndash;3&times; via R2DBC + Virtual Threads</li></ul>',
+    '',
+    '<span class="md-h2">## Patents</span>',
+    '<ul class="md-ul"><li><em style="color:#bbb529">USPTO US-17/878,823</em> &mdash; System and Method for Scheduling Database Applications</li><li><em style="color:#bbb529">Machine Unlearning on Identity Graph Neural Networks</em> &mdash; awarded patent</li></ul>',
+    '',
+    '<span class="md-h2">## Blog</span>',
+    '<p class="md-p"><a href="https://mrchaos10.blogspot.com/" target="_blank" rel="noopener" style="color:#4b9fea">mrchaos10.blogspot.com</a> &mdash; occasional posts on tech and random thoughts.</p>',
+  ]);
+}
+
+function renderExperience() {
+  return codeView([
+    '<span class="kw">package</span> <span class="dim">com.varadharajan.portfolio;</span>',
+    '',
+    '<span class="kw">import</span> <span class="dim">visa.inc.*;</span>',
+    '<span class="kw">import</span> <span class="dim">java.time.*;</span>',
+    '',
+    '<span class="cmt">/**</span>',
+    '<span class="cmt"> * Professional Experience &mdash; 7+ years at Visa Inc.</span>',
+    '<span class="cmt"> * Bangalore, India &middot; 2 USPTO patents</span>',
+    '<span class="cmt"> */</span>',
+    '<span class="anno">@Engineer</span>(<span class="param">level</span>=<span class="str">"Staff"</span>, <span class="param">company</span>=<span class="str">"Visa Inc."</span>)',
+    '<span class="kw">public class</span> <span class="teal">Experience</span> {',
+    '',
+    expBlock(true, 'Senior Consultant Staff Engineer / SDE-4',
+      'Visa Inc. &mdash; Currencycloud End Client Onboarding',
+      'Nov 2025 &ndash; Present', 'Bangalore, India',
+      ['Led engineering of <strong>End Client Onboarding platform</strong> (B2B2X); owned <strong>Case Management</strong> &amp; <strong>Identity</strong> domains serving 20+ internal services.',
+       'Applied <strong>Domain-Driven Design (DDD)</strong> &mdash; decomposed onboarding into 10+ capability-driven bounded-context services.',
+       'Architected event-driven platform on <strong>Java, Spring Boot &amp; Apache Kafka</strong>: <strong>300&ndash;500 events/sec per pod</strong>, sub-50ms P95 latency.',
+       'Reduced <strong>P99 latency 20&ndash;25%</strong> via Datadog analysis; boosted concurrency <strong>2&ndash;3&times;</strong> with R2DBC + Java Virtual Threads.',
+       'Introduced <strong>AI-assisted compliance workflows</strong> (Claude Code + agentic orchestration) &rarr; <strong>35&ndash;40% reduction</strong> in manual investigation time.',
+       'Served as <strong>Application Technical Contact (ATC)</strong> for 3+ mission-critical services.'],
+      ['Java','Spring Boot','Apache Kafka','R2DBC','Virtual Threads','DDD','Datadog','Claude AI','Kubernetes'], ''),
+    '',
+    expBlock(false, 'Staff Data Engineer / Fullstack Engineer',
+      'Visa Inc. &mdash; Loyalty and Benefits Platform',
+      'Mar 2024 &ndash; Nov 2025', 'Bangalore, India',
+      ['Led scrum team of 6 &mdash; modernised data pipelines from ETL/Spark to <strong>Lambda architecture</strong> with Apache Kafka.',
+       'Redesigned pipelines: <strong>5M real-time + 30M batch records</strong>, Tier0 SLAs, 6-nines availability.',
+       'Reduced GET API latency from 250ms to <strong>&lt;100ms at 300 TPS</strong> via Caffeine (L1) + Redis (L2) Snowflake caching pattern.',
+       'Modernised Visa Feature Select: Struts/Spring MVC &rarr; <strong>Spring Boot + React microfrontends</strong>.',
+       'Built <strong>Marketing Genie</strong> (OpenSora, DeepFloyd, Llama-3) and <strong>Virtual Concierge RAG</strong> (Redis VectorStore + Anthropic Claude APIs).'],
+      ['Java','Apache Kafka','Spring Boot','React','Redis','Apache Spark','RAG','Llama-3','Claude APIs'], 'green'),
+    '',
+    expBlock(false, 'Senior Data Engineer / Fullstack Engineer',
+      'Visa Inc. &mdash; Buyer Travel Solutions &amp; Digital Benefits',
+      'May 2023 &ndash; Mar 2024', 'Bangalore, India',
+      ['Stabilised Buyer Travel platform post-COVID; reduced <strong>cross-border declines by 30%</strong> via Travel Authorization Tag.',
+       'Implemented <strong>Redis + RediSearch</strong>: 40% performance improvement, 300 TPS per pod.',
+       'Adopted <strong>Micronaut + Reactive Streams</strong> (SOLID) for lighter, responsive microservices.',
+       'Delivered REST/gRPC APIs with two-phase commit; enhanced UI/UX for DragonPass, AXA clients.'],
+      ['Java','Micronaut','Redis','RediSearch','gRPC','Reactive Streams','Apache Hive'], 'orange'),
+    '',
+    expBlock(false, 'Senior Software Engineer',
+      'Visa Inc. &mdash; Risk and Authentication Programs',
+      'Apr 2021 &ndash; May 2023', 'Bangalore, India',
+      ['Built <strong>Guide Authentication</strong> product (FIDO standards) &mdash; CI/CD, Karate/Locust test automation.',
+       'Generated <strong>fraud signals from identity graphs</strong> (JanusGraph); led team of 4 on TC40 batch pipelines.',
+       'Led migration to open-source <strong>Hadoop platform</strong>; mentored summer interns.',
+       '<em style="color:#bbb529">Patent:</em> Machine Unlearning on Identity Graph Neural Networks',
+       '<em style="color:#bbb529">USPTO US-17/878,823:</em> System and Method for Scheduling Database Applications'],
+      ['Java','Spring Boot','JanusGraph','Hadoop','Kubernetes','Jenkins','FIDO'], 'purple'),
+    '',
+    expBlock(false, 'Software Engineer',
+      'Visa Inc. &mdash; Merchant Data Products',
+      'Aug 2020 &ndash; Mar 2021', 'Bangalore, India',
+      ['Developed automated framework for <strong>Advertiser matching</strong> (Visa Ad Solutions).',
+       'Kickstarted productionalization of <strong>propensity audiences</strong> product.'],
+      ['Python','Apache Spark','Hadoop','Hive','Shell'], 'teal'),
+    '',
+    internBlock('Summer Intern &mdash; Data Products','Visa Inc.','May 2019 &ndash; Jul 2019','Bangalore, India',
+      ['Built automated healing framework for <strong>Merchant Search Engine</strong> anomaly patching.',
+       'Delivered full solution in 10 weeks using Apache Hadoop &amp; Spark.'],
+      ['Apache Hadoop','Apache Spark']),
+    '',
+    internBlock('Android Developer Intern','Changepay (Remote)','Jun 2020 &ndash; Jul 2020','Remote',
+      ['Native Android fintech features in a remote-first startup during COVID-19.'],
+      ['Android','Java','Kotlin']),
+    '',
+    internBlock('Full Stack Intern','Enunui Technologies','Jun 2018 &ndash; Jul 2018','Erode, India',
+      ['Built event management system with <strong>NodeJS + Angular</strong>; integrated Google Maps &amp; Directions API.',
+       'Containerised and deployed as micro-frontend + backend microservices.'],
+      ['NodeJS','Angular','MongoDB','Docker']),
+    '',
+    '}',
+  ]);
+}
+
+function expBlock(current, title, company, period, location, bullets, tags, colorClass) {
+  var badgeHtml = current ? '<span class="badge-current">&bull; CURRENT</span><br>' : '';
+  var tagHtml = tags.map(function(t){return '<span class="tag'+(colorClass?' '+colorClass:'')+'">'+t+'</span>';}).join('');
+  var liHtml = bullets.map(function(b){return '<li>'+b+'</li>';}).join('');
+  return '<div class="section-block'+(colorClass?' '+colorClass+'-border':'')+'">'+
+    badgeHtml+
+    '<h3>'+title+'</h3>'+
+    '<h4>'+company+'</h4>'+
+    '<p class="meta"><i class="fas fa-calendar-alt"></i> '+period+'&nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> '+location+'</p>'+
+    '<ul>'+liHtml+'</ul>'+
+    '<div class="tags">'+tagHtml+'</div>'+
+  '</div>';
+}
+
+function internBlock(title, company, period, location, bullets, tags) {
+  var liHtml = bullets.map(function(b){return '<li>'+b+'</li>';}).join('');
+  var tagHtml = tags.map(function(t){return '<span class="tag">'+t+'</span>';}).join('');
+  return '<div class="section-block" style="border-left-color:#6c7b8b">'+
+    '<span class="badge-intern">INTERNSHIP</span><br>'+
+    '<h3>'+title+'</h3>'+
+    '<h4>'+company+'</h4>'+
+    '<p class="meta"><i class="fas fa-calendar-alt"></i> '+period+'&nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> '+location+'</p>'+
+    '<ul>'+liHtml+'</ul>'+
+    '<div class="tags">'+tagHtml+'</div>'+
+  '</div>';
+}
+
+function renderEducation() {
+  return codeView([
+    '<span class="cmt"># Education.md &mdash; Academic Background</span>',
+    '',
+    '<span class="md-h1"># Education</span>',
+    '',
+    '<span class="md-h2">## Academic Degree</span>',
+    '<div class="section-block teal-border">'+
+      '<h3>BE in Computer Science and Engineering</h3>'+
+      '<h4>College of Engineering Guindy, Anna University</h4>'+
+      '<p class="meta"><i class="fas fa-calendar-alt"></i> Jun 2016 &ndash; Jun 2020 &nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i> Chennai, India</p>'+
+      '<ul>'+
+        '<li>CGPA: <strong style="color:#4ec9b0;font-size:15px">9.3</strong> / 10 &mdash; academic excellence throughout</li>'+
+        '<li>Volunteered in the <strong>National Sports Organisation (NSO)</strong></li>'+
+        '<li>Final year project: <em>Decision Support System for Agriculture</em> &mdash; NLP + CV model, <strong>90% accuracy</strong>. Guided by Dr. Velammal.</li>'+
+      '</ul>'+
+    '</div>',
+    '',
+    '<span class="md-h2">## Certifications</span>',
+    '<p class="md-p">See <a onclick="openFile(\'certifications\')" href="javascript:void(0)" style="color:#4b9fea;cursor:pointer">Certifications.md</a> for the full list.</p>',
+    '',
+    '<span class="md-h2">## Languages</span>',
+    '<div class="skill-pills" style="gap:8px;padding:4px 0">'+
+      '<span class="skill-pill" style="border-color:#4ec9b0;color:#4ec9b0">Tamil &mdash; Native</span>'+
+      '<span class="skill-pill" style="border-color:#4b9fea;color:#4b9fea">English &mdash; Fluent</span>'+
+    '</div>',
+  ]);
+}
+
+function renderCertifications() {
+  var certs = [
+    {icon:'fab fa-docker',     color:'#4b9fea', title:'Certified Kubernetes Application Developer (CKAD)',       url:'https://www.credly.com/badges/d50746d3-53a3-433d-9940-6d84ca41f54c', issuer:'The Linux Foundation', date:'Sep 2021'},
+    {icon:'fas fa-star',       color:'#ffc66d', title:'Aspire Leadership Program',                               url:'', issuer:'Visa University', date:'Jan 2025'},
+    {icon:'fas fa-brain',      color:'#f44747', title:'Deep Learning Specialization',                            url:'https://www.coursera.org/account/accomplishments/specialization/certificate/4T6A29AK3AHB', issuer:'Coursera (deeplearning.ai)', date:'Apr 2020'},
+    {icon:'fas fa-brain',      color:'#ffc66d', title:'TensorFlow in Practice Specialization',                   url:'https://www.coursera.org/account/accomplishments/specialization/certificate/7SUUXPWTQ23W', issuer:'Coursera', date:'Apr 2020'},
+    {icon:'fas fa-cube',       color:'#6897bb', title:'Blockchain for Business',                                 url:'https://credentials.edx.org/credentials/6707f26cd6b8404580566b0f09eb1474/', issuer:'The Linux Foundation (edX)', date:'Apr 2020'},
+    {icon:'fas fa-robot',      color:'#6a8759', title:'Applied AI with Deep Learning',                           url:'https://www.coursera.org/account/accomplishments/certificate/UTF8P8RTZ5TG', issuer:'IBM (Coursera)', date:'Aug 2019'},
+    {icon:'fas fa-wave-square',color:'#4b9fea', title:'Advanced Machine Learning and Signal Processing',         url:'https://www.coursera.org/account/accomplishments/certificate/8ANPNDFP4X4R', issuer:'IBM (Coursera)', date:'Jul 2019'},
+    {icon:'fas fa-comment-dots',color:'#ffc66d',title:'Building AI Powered Chatbots Without Programming',       url:'https://www.coursera.org/account/accomplishments/certificate/4XL35JDYXKML', issuer:'Coursera', date:'Jul 2019'},
+    {icon:'fas fa-database',   color:'#6897bb', title:'Fundamentals of Scalable Data Science',                  url:'https://www.coursera.org/account/accomplishments/certificate/CFS7FQ9KAZ38', issuer:'IBM (Coursera)', date:'Jun 2019'},
+    {icon:'fas fa-language',   color:'#f44747', title:'DEV288x: Natural Language Processing (NLP)',              url:'https://courses.edx.org/certificates/4f29c3214afa48db90ce5ef7dfe40d10', issuer:'Microsoft (edX)', date:'Jun 2019'},
+  ];
+  var certItems = certs.map(function(c){
+    var titleHtml = c.url ? '<a href="'+c.url+'" target="_blank" rel="noopener">'+c.title+'</a>' : c.title;
+    return '<div class="cert-item-ide">'+
+      '<i class="'+c.icon+' cert-icon-i" style="color:'+c.color+';font-size:18px;width:24px;text-align:center;flex-shrink:0"></i>'+
+      '<div class="cert-info-i"><h4>'+titleHtml+'</h4><p>'+c.issuer+' &bull; '+c.date+'</p></div>'+
+    '</div>';
+  }).join('');
+  return codeView([
+    '<span class="cmt"># Certifications.md</span>',
+    '',
+    '<span class="md-h1"># Certifications &amp; Awards</span>',
+    '',
+    '<div style="background:#252526;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin:8px 0">'+certItems+'</div>',
+  ]);
+}
+
+function renderProjects() {
+  var projects = [
+    {lang:'Python / Jupyter',dot:'#DA5B0B',title:'Agricultural DSS &amp; Species Identification',desc:'Final Year Project &mdash; NLP + Computer Vision Decision Support System. Cloze QA &amp; semi-supervised querying models, <strong>90% accuracy</strong>.',tags:['NLP','Deep Learning','CV','Python'],year:'2020',url:'https://github.com/mrchaos10/AGRICULTURAL-DOMAIN-SPECIES-IDENTIFICATION-AND-SEMI-SUPERVISED-QUERYING-SYSTEM'},
+    {lang:'Python',dot:'#3572A5',title:'Code Completing JARVIS',desc:'Voice-based code completion engine generating C/C++/Java code from Lex rules in Python with minimal verbosity.',tags:['Voice Recognition','NLP','Lex','Python'],year:'Apr&ndash;May 2019',url:'https://github.com/mrchaos10/Your_JARVIS_to_CODE'},
+    {lang:'JavaScript &middot; Node.js',dot:'#F1E05A',title:'Online Parallelized Compiler',desc:'Web framework for online coding tests with parallel test-case execution and real-time multi-submission evaluation.',tags:['Node.js','Parallel Processing','JavaScript'],year:'Mar&ndash;Apr 2019',url:'https://github.com/mrchaos10/Onlinecompiler'},
+    {lang:'Python',dot:'#3572A5',title:'People You Can Follow',desc:'Twitter user recommender using topic modelling &amp; KNN clustering on tweet histories to suggest relevant accounts.',tags:['Topic Modelling','KNN Clustering','NLP','Python'],year:'Mar&ndash;Apr 2019',url:'https://github.com/mrchaos10/Common-Area-of-Interest-Analysis'},
+    {lang:'C &middot; Socket Programming',dot:'#555555',title:'Hummingbird File Search Engine',desc:'Distributed file search across networked systems implementing Google Hummingbird page-ranking algorithm.',tags:['C','Socket Programming','Search Algorithms'],year:'Nov&ndash;Dec 2018',url:'https://github.com/mrchaos10/HummingBirdFileSearchEngine'},
+    {lang:'C# &middot; .NET',dot:'#178600',title:'Remote Desktop / Share Your Screen',desc:'Client-server framework for real-time screen sharing over intranet on Windows systems.',tags:['C#','.NET','WinForms','Networking'],year:'Nov&ndash;Dec 2018',url:'https://github.com/mrchaos10/RemoteDesktop'},
+    {lang:'JavaScript',dot:'#F1E05A',title:'Disaster Management Platform',desc:'Web framework connecting disaster victims with volunteers via Google Maps API for real-time coordination.',tags:['JavaScript','Google Maps API','Node.js'],year:'Mar&ndash;Apr 2018',url:'https://github.com/mrchaos10/DisasterManagementPlatform'},
+    {lang:'Java',dot:'#B07219',title:'Vault &mdash; Secure Credential Manager',desc:'Java GUI credential store using AES encryption to protect secrets from phishing attacks.',tags:['Java','AES Encryption','Security'],year:'Mar&ndash;Apr 2018',url:'https://github.com/mrchaos10/OsMiniProject'},
+    {lang:'Java &middot; Oracle SQL',dot:'#B07219',title:'Library Management System',desc:'Java GUI library management app with Oracle SQL backend for cataloguing and borrowing management.',tags:['Java','Oracle SQL','Swing'],year:'Mar&ndash;Apr 2018',url:'https://github.com/mrchaos10/LibraryManagementSystem'},
+    {lang:'Java',dot:'#B07219',title:'Smart Attendance Manager',desc:'Intelligent Java attendance framework with automated daily/monthly reporting at database level.',tags:['Java','SQL','DBMS'],year:'Mar&ndash;Apr 2018',url:'https://github.com/mrchaos10/Dbmsminiproject'},
+    {lang:'Java',dot:'#B07219',title:'PLAuction',desc:'Premier League fantasy auction app &mdash; teams bid for players within budget constraints with live management.',tags:['Java','OOP'],year:'2020',url:'https://github.com/mrchaos10/PLAuction'},
+    {lang:'Go &middot; Fork',dot:'#00ADD8',title:'DiceDB',desc:'Fork of DiceDB &mdash; Redis-compliant, reactive, highly-available unified cache optimised for modern hardware.',tags:['Go','Distributed Systems','Cache'],year:'2024',url:'https://github.com/mrchaos10/dice'},
+  ];
+  var cards = projects.map(function(p){
+    var tagHtml = p.tags.map(function(t){return '<span class="tag">'+t+'</span>';}).join('');
+    return '<div class="proj-card-ide">'+
+      '<div class="pci-header">'+
+        '<span class="lang-dot" style="background:'+p.dot+'"></span>'+
+        '<span class="lang-label">'+p.lang+'</span>'+
+        '<a class="gh-link" href="'+p.url+'" target="_blank" rel="noopener" title="View on GitHub"><i class="fab fa-github"></i></a>'+
+      '</div>'+
+      '<div class="pci-body">'+
+        '<h3>'+p.title+'</h3>'+
+        '<p>'+p.desc+'</p>'+
+        '<div class="tags">'+tagHtml+'</div>'+
+      '</div>'+
+      '<div class="pci-footer">'+
+        '<span class="year"><i class="fas fa-calendar-alt"></i> '+p.year+'</span>'+
+        '<a href="'+p.url+'" target="_blank" rel="noopener">View Repo &rarr;</a>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+  return codeView([
+    '<span class="cmt">// Projects.ts &mdash; 20+ repositories on GitHub</span>',
+    '<span class="cmt">// github.com/mrchaos10</span>',
+    '',
+    '<span class="kw">interface</span> <span class="teal">Project</span> {',
+    '  <span class="param">title</span>: <span class="str">string</span>;',
+    '  <span class="param">language</span>: <span class="str">string</span>;',
+    '  <span class="param">tags</span>: <span class="str">string</span>[];',
+    '  <span class="param">url</span>: <span class="str">string</span>;',
+    '}',
+    '',
+    '<span class="kw">const</span> <span class="fn">projects</span>: <span class="teal">Project</span>[] =',
+    '<div class="proj-grid-ide">'+cards+'</div>',
+  ]);
+}
+
+function renderSkills() {
+  var groups = [
+    {title:'Languages',     pills:['Java','Python','TypeScript','Go','C','C++','C#','Shell','SQL'],                                  cls:''},
+    {title:'Backend',       pills:['Spring Boot','Micronaut','Node.js','gRPC','REST','Virtual Threads','R2DBC'],                      cls:'orange'},
+    {title:'Frontend',      pills:['React','Angular','Microfrontend'],                                                               cls:'teal'},
+    {title:'Data &amp; Streams',pills:['Apache Kafka','Apache Spark','Apache Hive','Apache Hadoop'],                                 cls:''},
+    {title:'Databases',     pills:['PostgreSQL','Redis','RediSearch','MongoDB','Snowflake','JanusGraph','Oracle SQL'],                 cls:'green'},
+    {title:'Infrastructure',pills:['Kubernetes','Docker','Jenkins','Git','Datadog','Locust','Karate'],                               cls:'orange'},
+    {title:'AI / ML',       pills:['Claude APIs','OpenAI','RAG','LangChain','TensorFlow','PyTorch','LLM Orchestration','FIDO'],       cls:'purple'},
+    {title:'Practices',     pills:['Domain-Driven Design','SOLID','Event-Driven Architecture','Microservices','TDD/BDD','SSDLC','Lambda Architecture'], cls:'teal'},
+  ];
+  var groupsHtml = groups.map(function(g){
+    var pillHtml = g.pills.map(function(p){
+      return '<span class="skill-pill'+(g.cls?' '+g.cls:'')+'">'+p+'</span>';
+    }).join('');
+    return '<div class="skill-group"><div class="skill-group-title">'+g.title+'</div><div class="skill-pills">'+pillHtml+'</div></div>';
+  }).join('');
+  return codeView([
+    '<span class="cmt">// skills.json &mdash; Technology &amp; Practice Stack</span>',
+    '',
+    '{',
+    '  <span class="cmt">// Hover a pill to highlight. Groups represent capability areas.</span>',
+    '',
+    groupsHtml,
+    '}',
+  ]);
+}
+
+function renderContact() {
+  var links = [
+    {icon:'fab fa-github',    color:'#e0e0e0', label:'GitHub',    sub:'@mrchaos10',                url:'https://github.com/mrchaos10'},
+    {icon:'fab fa-linkedin',  color:'#0a66c2', label:'LinkedIn',  sub:'varadharajan-raghavendran', url:'https://in.linkedin.com/in/varadharajan-raghavendran-bb3299167'},
+    {icon:'fab fa-twitter',   color:'#1d9bf0', label:'Twitter',   sub:'@mr_chaos_10',              url:'https://twitter.com/mr_chaos_10'},
+    {icon:'fas fa-blog',      color:'#ff6600', label:'Blog',      sub:'mrchaos10.blogspot.com',    url:'https://mrchaos10.blogspot.com/'},
+    {icon:'fab fa-facebook',  color:'#1877f2', label:'Facebook',  sub:'mr.chaos.10',               url:'https://www.facebook.com/mr.chaos.10'},
+    {icon:'fab fa-instagram', color:'#e1306c', label:'Instagram', sub:'__mr_chaos_10_____',        url:'https://www.instagram.com/__mr_chaos_10_____/'},
+    {icon:'fab fa-youtube',   color:'#ff0000', label:'YouTube',   sub:'mrchaos10 channel',         url:'https://www.youtube.com/channel/UCzpevHSkBma6BYC2aAAXnXQ'},
+    {icon:'fas fa-file-pdf',  color:'#f44747', label:'Resume',    sub:'Download PDF',              url:'Resume.pdf'},
+  ];
+  var linksHtml = '<div class="contact-links">'+links.map(function(l){
+    return '<a class="contact-link" href="'+l.url+'" target="_blank" rel="noopener">'+
+      '<i class="'+l.icon+' cl-icon" style="color:'+l.color+'"></i>'+
+      '<div class="cl-text"><h4>'+l.label+'</h4><p>'+l.sub+'</p></div>'+
+    '</a>';
+  }).join('')+'</div>';
+  return codeView([
+    '<span class="cmt"># Contact.md &mdash; Let\'s connect</span>',
+    '',
+    '<span class="md-h1"># Get in Touch</span>',
+    '',
+    '<div class="md-blockquote">Always open to interesting conversations, collaboration, or just a good engineering discussion.</div>',
+    '',
+    '<span class="md-h2">## Profiles &amp; Links</span>',
+    linksHtml,
+    '',
+    '<span class="md-h2">## Location</span>',
+    '<p class="md-p"><i class="fas fa-map-marker-alt" style="color:#f44747;margin-right:6px"></i><strong style="color:#e0e0e0">Bangalore, Karnataka, India</strong></p>',
+  ]);
+}
+
+/* ── TAB MANAGEMENT ── */
+function openFile(file) {
+  if(file === 'resume') { window.open('Resume.pdf','_blank'); return; }
+  if(!FILES[file]) return;
+  if(!openTabs.includes(file)) {
+    openTabs.push(file);
+    addTab(file);
+  }
+  switchTab(file);
+  document.querySelectorAll('.tree-item').forEach(function(el){el.classList.remove('active');});
+  var treeEl = document.getElementById('tree-'+file);
+  if(treeEl) treeEl.classList.add('active');
+  // close mobile sidebar
+  if(window.innerWidth <= 768) {
+    document.getElementById('sidebar').classList.remove('mobile-open');
+  }
+}
+
+function addTab(file) {
+  var meta = FILES[file];
+  var tab = document.createElement('div');
+  tab.className = 'tab';
+  tab.dataset.file = file;
+  tab.onclick = function(){switchTab(file);};
+  tab.innerHTML = '<i class="fas '+meta.icon+' tab-icon '+meta.iconCls+'"></i>'+
+    '<span style="margin-left:5px">'+meta.label+'</span>'+
+    '<span class="tab-close" onclick="closeTab(event,\''+file+'\')"><i class="fas fa-times"></i></span>';
+  document.getElementById('tabBar').appendChild(tab);
+}
+
+function switchTab(file) {
+  activeTab = file;
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active', t.dataset.file===file);});
+  var meta = FILES[file] || {label:file};
+  document.getElementById('titleFile').textContent = meta.label || file;
+  document.getElementById('statusFile').textContent = meta.label || file;
+  var ec = document.getElementById('editorContent');
+  switch(file){
+    case 'welcome':        ec.innerHTML = renderWelcome(); break;
+    case 'about':          ec.innerHTML = renderAbout(); break;
+    case 'experience':     ec.innerHTML = renderExperience(); break;
+    case 'education':      ec.innerHTML = renderEducation(); break;
+    case 'projects':       ec.innerHTML = renderProjects(); break;
+    case 'skills':         ec.innerHTML = renderSkills(); break;
+    case 'certifications': ec.innerHTML = renderCertifications(); break;
+    case 'contact':        ec.innerHTML = renderContact(); break;
+    default: ec.innerHTML = '<div style="padding:20px;color:#6c7b8b">Select a file to view.</div>';
+  }
+  ec.scrollTop = 0;
+}
+
+function closeTab(e, file) {
+  e.stopPropagation();
+  if(openTabs.length === 1) return;
+  openTabs = openTabs.filter(function(t){return t!==file;});
+  var tabEl = document.querySelector('.tab[data-file="'+file+'"]');
+  if(tabEl) tabEl.remove();
+  if(activeTab === file) switchTab(openTabs[openTabs.length-1]);
+}
+
+/* ── TERMINAL ── */
+function termPrint(html, cls) {
+  var out = document.getElementById('termOutput');
+  var line = document.createElement('span');
+  line.className = 'term-line' + (cls ? ' '+cls : '');
+  line.innerHTML = html;
+  out.appendChild(line);
+  out.appendChild(document.createTextNode('\n'));
+  out.scrollTop = out.scrollHeight;
+}
+
+function termClear() { document.getElementById('termOutput').innerHTML = ''; }
+
+function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function execCommand(raw) {
+  var cmd = raw.trim().toLowerCase();
+  if(!cmd) return;
+  cmdHistory.unshift(raw);
+  if(cmdHistory.length>50) cmdHistory.pop();
+  histIdx = -1;
+  termPrint('<span style="color:#4b9fea">varadharajan</span><span style="color:#6c7b8b">@</span><span style="color:#4ec9b0">portfolio</span>:~$ <span class="cmd">'+escHtml(raw)+'</span>');
+
+  if(cmd==='clear'){termClear();return;}
+  if(cmd==='whoami'){
+    termPrint('<span style="color:#ffc66d">Varadharajan Raghavendran</span>');
+    termPrint('<span style="color:#6c7b8b">Senior Consultant Staff Engineer / SDE-4 @ Visa Inc.</span>');
+    termPrint('<span style="color:#6c7b8b">Bangalore, India &middot; 7+ years &middot; 2 patents &middot; CKAD certified</span>');
+    termPrint('<span style="color:#6a8759">Type /help to explore this portfolio.</span>');
+    return;
+  }
+  if(cmd==='ls'||cmd==='ls -la'){
+    termPrint('<span style="color:#ffc66d">Available sections:</span>');
+    [['About.md','/about'],['Experience.java','/experience'],['Education.md','/education'],
+     ['Projects.ts','/projects'],['skills.json','/skills'],['Certifications.md','/certifications'],
+     ['Contact.md','/contact'],['Resume.pdf','/resume']
+    ].forEach(function(pair){
+      termPrint('  <span style="color:#6a8759">'+pair[0].padEnd(24)+'</span><span style="color:#6c7b8b">'+pair[1]+'</span>');
+    });
+    return;
+  }
+  if(cmd==='/help'||cmd==='help'){
+    termPrint('<span style="color:#ffc66d">Portfolio IDE &mdash; Command Reference</span>');
+    termPrint('<span style="color:#4a5568">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>');
+    COMMANDS.forEach(function(c){
+      termPrint('  <span style="color:#ffc66d">'+c.cmd.padEnd(20)+'</span><span style="color:#6c7b8b">'+c.desc+'</span>');
+    });
+    termPrint('<span style="color:#4a5568">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>');
+    termPrint('<span style="color:#6c7b8b">Tip: use &uarr; / &darr; for command history. Tab/Enter to pick autocomplete.</span>');
+    return;
+  }
+  var fileMap = {
+    '/about':'about','/experience':'experience','/education':'education',
+    '/projects':'projects','/skills':'skills','/certifications':'certifications',
+    '/certs':'certifications','/contact':'contact','/resume':'resume',
+  };
+  if(fileMap[cmd]){
+    var file = fileMap[cmd];
+    if(file==='resume'){
+      termPrint('<span style="color:#6a8759">Opening Resume.pdf&hellip;</span>');
+      window.open('Resume.pdf','_blank');
+    } else {
+      termPrint('<span style="color:#6a8759">Opening '+FILES[file].label+'&hellip;</span>');
+      openFile(file);
+    }
+    return;
+  }
+  termPrint('<span style="color:#f44747">bash: '+escHtml(cmd)+': command not found</span>');
+  termPrint('<span style="color:#6c7b8b">Type <span style="color:#ffc66d">/help</span> to see available commands.</span>');
+}
+
+/* ── AUTOCOMPLETE ── */
+function updateAC(val) {
+  var ac = document.getElementById('autocomplete');
+  if(!val){ac.style.display='none';acIdx=-1;return;}
+  var matches = COMMANDS.filter(function(c){return c.cmd.startsWith(val.toLowerCase())||c.cmd.includes(val.toLowerCase());});
+  if(!matches.length){ac.style.display='none';acIdx=-1;return;}
+  ac.innerHTML = matches.map(function(c,i){
+    return '<div class="ac-item" data-idx="'+i+'" onmousedown="pickAC(event,\''+c.cmd+'\')" onmouseover="setAcIdx('+i+')">'+
+      '<span class="ac-cmd">'+c.cmd+'</span><span class="ac-desc">'+c.desc+'</span>'+
+    '</div>';
+  }).join('');
+  ac.style.display='block';
+  acIdx=-1;
+}
+
+function pickAC(e, cmd){
+  e.preventDefault();
+  document.getElementById('termInput').value=cmd;
+  document.getElementById('autocomplete').style.display='none';
+  document.getElementById('termInput').focus();
+}
+function setAcIdx(i){acIdx=i;highlightAC();}
+function highlightAC(){document.querySelectorAll('.ac-item').forEach(function(el,i){el.classList.toggle('selected',i===acIdx);});}
+function moveAC(dir){
+  var items=document.querySelectorAll('.ac-item');
+  if(!items.length)return false;
+  acIdx=Math.max(0,Math.min(items.length-1,acIdx+dir));
+  highlightAC();return true;
+}
+
+/* ── KEYBOARD ── */
+document.getElementById('termInput').addEventListener('keydown',function(e){
+  var ac=document.getElementById('autocomplete');
+  if(e.key==='Enter'){
+    var sel=ac.querySelector('.ac-item.selected');
+    if(sel&&ac.style.display!=='none'){this.value=sel.querySelector('.ac-cmd').textContent;ac.style.display='none';}
+    else{var v=this.value;this.value='';ac.style.display='none';execCommand(v);}
+    e.preventDefault();
+  } else if(e.key==='ArrowUp'){
+    if(ac.style.display!=='none'){moveAC(-1);e.preventDefault();}
+    else if(cmdHistory.length){histIdx=Math.min(histIdx+1,cmdHistory.length-1);this.value=cmdHistory[histIdx];e.preventDefault();}
+  } else if(e.key==='ArrowDown'){
+    if(ac.style.display!=='none'){moveAC(1);e.preventDefault();}
+    else{histIdx=Math.max(histIdx-1,-1);this.value=histIdx>=0?cmdHistory[histIdx]:'';e.preventDefault();}
+  } else if(e.key==='Escape'){
+    ac.style.display='none';acIdx=-1;
+  } else if(e.key==='Tab'){
+    var first=ac.querySelector('.ac-item.selected')||ac.querySelector('.ac-item');
+    if(first){this.value=first.querySelector('.ac-cmd').textContent;ac.style.display='none';}
+    e.preventDefault();
+  }
+});
+
+document.getElementById('termInput').addEventListener('input',function(){updateAC(this.value);});
+
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.term-input-wrap'))document.getElementById('autocomplete').style.display='none';
+});
+
+/* ── UI HELPERS ── */
+function toggleSidebar(){
+  var sb = document.getElementById('sidebar');
+  if(window.innerWidth<=768) sb.classList.toggle('mobile-open');
+  else sb.classList.toggle('collapsed');
+}
+
+function togglePanel(){
+  panelVisible=!panelVisible;
+  var p=document.getElementById('bottomPanel');
+  p.style.height=panelVisible?'var(--bottom-h)':'28px';
+  document.getElementById('terminalBody').style.display=panelVisible?'':'none';
+}
+
+function focusTerminal(){
+  if(!panelVisible)togglePanel();
+  document.getElementById('termInput').focus();
+}
+
+document.addEventListener('keydown',function(e){
+  if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();focusTerminal();}
+  if((e.metaKey||e.ctrlKey)&&e.key==='b'){e.preventDefault();toggleSidebar();}
+});
+
+/* ── BOOT ── */
+(function init(){
+  switchTab('welcome');
+  setTimeout(function(){
+    termPrint('<span style="color:#ffc66d">Portfolio IDE v2.0.0 &mdash; Varadharajan Raghavendran</span>');
+    termPrint('<span style="color:#6c7b8b">Senior Consultant Staff Engineer @ Visa Inc. &middot; Bangalore, India</span>');
+    termPrint('<span style="color:#6c7b8b">Type <span style="color:#ffc66d">/help</span> to see all commands, or click a file in the Project tree on the left.</span>');
+    termPrint('');
+  },100);
+})();
+</script>
+</body>
+</html>
